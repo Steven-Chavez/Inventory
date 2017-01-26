@@ -34,10 +34,19 @@ class Product
      * @var boolean identifying if product is new or not
      */
     private $brandNew;
+
     /**
      * @var type id identifies product type; foreign key
      */
     private $typeID;
+
+    /**
+     * Product constructor.
+     */
+    public function __construct()
+    {
+    }
+
 
 }
 ?>
