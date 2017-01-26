@@ -191,5 +191,24 @@ class Product
     {
         $this->typeId = $typeId;
     }
+
+    //###################################
+    //  DB CRUD METHODS
+    //###################################
+    public function insert(&$pdo)
+    {
+        $query = "INSERT INTO Product(ProductID, ProductName, "
+            ."ProductNumber, Color, NumberPerCase, BrandNew, TypeID)"
+            ."VALUES("
+            .$this->productId . ","
+            .$this->productName . ","
+            .$this->productNumber . ","
+            .$this->color . ","
+            .$this->numPerCase . ","
+            .$this->brandNew . ","
+            .$this->typeId . ")";
+
+        $pdo->query($query);
+    }
 }
 ?>
