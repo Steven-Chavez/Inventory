@@ -10,12 +10,34 @@
 
 class Product
 {
+    /**
+     * @var product id for Product table; primary key
+     */
     private $productID;
+    /**
+     * @var name of product
+     */
     private $prodcutName;
+    /**
+     * @var number to identify product; unique key
+     */
     private $productNumber;
+    /**
+     * @var color of product
+     */
     private $color;
+    /**
+     * @var number of products per case
+     */
     private $numPerCase;
-    private $typeID;
+    /**
+     * @var boolean identifying if product is new or not
+     */
     private $brandNew;
+    /**
+     * @var type id identifies product type; foreign key
+     */
+    private $typeID;
+
 }
 ?>
