@@ -34,7 +34,6 @@ class Product
      * @var boolean identifying if product is new or not
      */
     private $brandNew;
-
     /**
      * @var type id identifies product type; foreign key
      */
@@ -47,8 +46,16 @@ class Product
     /**
      * Product constructor.
      */
-    public function __construct()
+    public function __construct($productId, $productName, $productNumber,
+                                $color, $numPerCase, $brandNew, $typeId)
     {
+        $this->setProductId($productId);
+        $this->setProductName($productName);
+        $this->setProductNumber($productNumber);
+        $this->setColor($color);
+        $this->setNumPerCase($numPerCase);
+        $this->setBrandNew($brandNew);
+        $this->setTypeId($typeId);
     }
 
     //###################################
@@ -184,6 +191,5 @@ class Product
     {
         $this->typeId = $typeId;
     }
-
 }
 ?>
