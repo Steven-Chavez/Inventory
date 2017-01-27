@@ -1,3 +1,12 @@
+<?php
+    require_once("../../database.php");
+    require_once("php/classes/product-type.php");
+
+    $pdo = new DatabaseConnect();
+    $pdo = $pdo->getPDO();
+
+    $productType = ProductType::readTypeNames($pdo);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,8 +24,16 @@
         Number Per Case: <br>
         <input type="number" name="NumberPerCase"><br>
         Type: <br>
-        <input type="number" name="TypeID"><br>
-        <br>
+        <select name="TypeId">
+            <?php
+                //Populate drop down box with values from db
+                foreach ($productType as $value)
+                {
+                    echo"<option value=\"". $value . "\">"
+                        . $value . "</option>";
+                }
+            ?>
+        </select><br><br>
         <input type="submit" value="Submit">
     </form>
 </body>

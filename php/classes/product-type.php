@@ -25,7 +25,7 @@ class ProductType
     //  CONSTRUCTOR
     //###################################
 
-    function __construct($typeId, $typeName)
+    public function __construct($typeId, $typeName)
     {
         $this->setTypeId($typeId);
         $this->setTypeName($typeName);
@@ -74,5 +74,22 @@ class ProductType
     public function setTypeName($typeName)
     {
         $this->typeName = $typeName;
+    }
+
+    //###################################
+    //  DB CRUD METHODS
+    //###################################
+    public static function readTypeNames(&$pdo)
+    {
+        $query = "SELECT TypeName FROM ProductType";
+
+        $results = $pdo->query($query);
+
+        while($row = $results->fetch(PDO::FETCH_OBJ))
+        {
+            $data[] = $row->TypeName;
+        }
+
+        return $data;
     }
 }
