@@ -14,7 +14,7 @@
     <title>Product Insert</title>
 </head>
 <body>
-    <form>
+    <form action="php/form-processor/product-add-processor.php" method="post">
         Product Name: <br>
         <input type="text" name="ProductName"><br><br>
         Product Number: <br>
