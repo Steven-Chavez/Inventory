@@ -59,7 +59,7 @@ class ProductType
     //###################################
 
     /**
-     * Sets product type id
+     * set product type id
      * @param mixed $typeId
      */
     public function setTypeId($typeId)
@@ -68,7 +68,7 @@ class ProductType
     }
 
     /**
-     * Sets product type name
+     * set product type name
      * @param mixed $typeName
      */
     public function setTypeName($typeName)
