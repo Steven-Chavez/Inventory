@@ -23,9 +23,6 @@
         <input type="text" name="Color"><br><br>
         Number Per Case: <br>
         <input type="number" name="NumberPerCase"><br><br>
-        In Box?: <br>
-        <input type="radio" name="BrandNew" value="Yes" checked> Yes<br>
-        <input type="radio" name="BrandNew" value="No"> No <br><br>
         Type: <br>
         <select name="TypeId">
             <?php
