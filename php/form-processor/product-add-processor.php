@@ -24,6 +24,10 @@
     $product = new Product(null, $name, $number, $color, $numPerCase, $typeId);
     $product->insert($pdo);
 
+    header('Location: ../../product-add.php');
+
+
+
 
 
 
