@@ -3,6 +3,7 @@
     require_once("php/classes/product-type.php");
 
     $pdo = new DatabaseConnect();
+
     $pdo = $pdo->getPDO();
 
     $productType = ProductType::readTypeNames($pdo);
@@ -27,10 +28,11 @@
         <select name="TypeId">
             <?php
                 //Populate drop down box with values from db
+                $i = 1;
                 foreach ($productType as $value)
                 {
-                    echo"<option value=\"". $value . "\">"
-                        . $value . "</option>";
+                    echo"<option value=\"{$i}\">{$value}</option>";
+                    $i++;
                 }
             ?>
         </select><br><br>
