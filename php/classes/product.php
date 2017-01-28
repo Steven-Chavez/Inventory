@@ -31,10 +31,6 @@ class Product
      */
     private $numPerCase;
     /**
-     * @var boolean identifying if product is new or not
-     */
-    private $brandNew;
-    /**
      * @var type id identifies product type; foreign key
      */
     private $typeId;
@@ -47,14 +43,13 @@ class Product
      * Product constructor.
      */
     public function __construct($productId, $productName, $productNumber,
-                                $color, $numPerCase, $brandNew, $typeId)
+                                $color, $numPerCase, $typeId)
     {
         $this->setProductId($productId);
         $this->setProductName($productName);
         $this->setProductNumber($productNumber);
         $this->setColor($color);
         $this->setNumPerCase($numPerCase);
-        $this->setBrandNew($brandNew);
         $this->setTypeId($typeId);
     }
 
@@ -105,15 +100,6 @@ class Product
     public function getNumPerCase()
     {
         return $this->numPerCase;
-    }
-
-    /**
-     * is product brand new
-     * @return bool
-     */
-    public function isBrandNew()
-    {
-        return $this->brandNew;
     }
 
     /**
@@ -175,15 +161,6 @@ class Product
     }
 
     /**
-     * Sets boolean if product is brand new or not
-     * @param $brandNew
-     */
-    public  function setBrandNew($brandNew)
-    {
-        $this->brandNew = $brandNew;
-    }
-
-    /**
      * Sets type of product
      * @param $typeId
      */
@@ -197,18 +174,18 @@ class Product
     //###################################
     public function insert(&$pdo)
     {
-        $query = "INSERT INTO Product(ProductID, ProductName, "
-            ."ProductNumber, Color, NumberPerCase, BrandNew, TypeID)"
-            ."VALUES("
-            .$this->productId . ","
-            .$this->productName . ","
-            .$this->productNumber . ","
-            .$this->color . ","
-            .$this->numPerCase . ","
-            .$this->brandNew . ","
-            .$this->typeId . ")";
+        $SQL = "
+            INSERT INTO Product(ProductName, ProductNumber,
+                              Color, NumberPerCase, TypeID) 
+            VALUES(:pName, :pNumber, :color, :percase, :typeId)";
 
-        $pdo->query($query);
+        $stmt = $pdo->prepare($SQL);
+        $stmt->bindParam(':pName', $this->productName, PDO::PARAM_STR);
+        $stmt->bindParam(':pNumber', $this->productNumber, PDO::PARAM_STR);
+        $stmt->bindParam(':color', $this->color, PDO::PARAM_STR);
+        $stmt->bindParam(':percase', $this->numPerCase, PDO::PARAM_INT);
+        $stmt->bindParam(':typeId', $this->typeId, PDO::PARAM_INT);
+        $stmt->execute();
     }
 }
 ?>
