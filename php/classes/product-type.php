@@ -81,9 +81,9 @@ class ProductType
     //###################################
     public static function readTypeNames(&$pdo)
     {
-        $query = "SELECT TypeName FROM ProductType";
+        $SQL = "SELECT TypeName FROM ProductType";
 
-        $results = $pdo->query($query);
+        $results = $pdo->query($SQL);
 
         while($row = $results->fetch(PDO::FETCH_OBJ))
         {
@@ -91,5 +91,17 @@ class ProductType
         }
 
         return $data;
+    }
+
+    public function insertProductType(&$pdo)
+    {
+        $SQL = "
+            INSERT INTO ProductType(TypeName)
+            VALUES(:pType)
+            ";
+
+        $stmt = $pdo->prepare($SQL);
+        $stmt->bindParam(":pType", $this->typeName, PDO::PARAM_STR);
+        $stmt->execute();
     }
 }
