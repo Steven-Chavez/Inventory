@@ -16,24 +16,25 @@
     $productArray = Product::readProductsByTypeId($pdo, 1);
 
     //handle productId so that we do not inventor repeated products from array
-    if(!isset($_SESSION['productId']))
+    if(!isset($_SESSION['index']))
     {
-        $_SESSION['productId'] = 0;
+        $_SESSION['index'] = 0;
     }
     else
     {
-        $_SESSION['productId']++;
+        $_SESSION['index']++;
     }
 
     //Once array is done destroy session and redirect
-    if(sizeof($productArray) == $_SESSION['productId'])
+    if(sizeof($productArray) == $_SESSION['index'])
     {
         session_unset();
         session_destroy();
         header("Location: index.php");
     }
 
-    $productId = $_SESSION['productId'];
+    $index = $_SESSION['index'];
+    $_SESSION['productId'] = $productArray[$index]->ProductId;
 
 ?>
 <!DOCTYPE html>
@@ -74,9 +75,9 @@
     </nav>
     <div class="col-md-4 col-md-offset-4 col-sm-10 col-sm-offset-1">
         <?php
-            echo "<h2>{$productArray[$productId]->ProductName}</h2>"
+            echo "<h2>{$productArray[$index]->ProductName}</h2>"
         ?>
-        <form  action="php/form-processor/product-add-processor.php" method="post">
+        <form  action="php/form-processor/inventory-processor.php" method="post">
             <h3>Quantity:</h3> <br>
             <input class="form-control" type="number" name="qty"><br><br>
             <h3>Local Location:</h3> <br>
