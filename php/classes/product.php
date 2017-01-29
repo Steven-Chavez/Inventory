@@ -174,12 +174,12 @@ class Product
     //###################################
     public function insert(&$pdo)
     {
-        $SQL = "
+        $sql = "
             INSERT INTO Product(ProductName, ProductNumber,
                               Color, NumberPerCase, TypeID) 
             VALUES(:pName, :pNumber, :color, :percase, :typeId)";
 
-        $stmt = $pdo->prepare($SQL);
+        $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':pName', $this->productName, PDO::PARAM_STR);
         $stmt->bindParam(':pNumber', $this->productNumber, PDO::PARAM_STR);
         $stmt->bindParam(':color', $this->color, PDO::PARAM_STR);
