@@ -12,17 +12,50 @@ class Inventory
     //###################################
     //  FIELDS
     //###################################
+    /**
+     * @var id for product inventory
+     */
     private $inventoryId;
+    /**
+     * @var id for product
+     */
     private $productId;
+    /**
+     * @var id for location
+     */
     private $locationId;
+    /**
+     * @var date of inventory
+     */
     private $date;
+    /**
+     * @var quantity of product in inventory
+     */
     private $quantity;
+    /**
+     * @var location of product locally
+     */
     private $localLocation;
+
+    //###################################
+    //  CONSTRUCTOR
+    //###################################
+    public function __construct( $inventoryId, $productId,
+     $locationId, $date, $quantity, $localLocation)
+    {
+        $this->setInventoryId($inventoryId);
+        $this->setProductId($productId);
+        $this->setLocationId($locationId);
+        $this->setDate($date);
+        $this->setQuantity($quantity);
+        $this->setLocalLocation($localLocation);
+    }
 
     //###################################
     //  ACCESSOR METHODS
     //###################################
     /**
+     * get id of inventory
      * @return mixed
      */
     public function getInventoryId()
@@ -31,6 +64,7 @@ class Inventory
     }
 
     /**
+     * get id of product
      * @return mixed
      */
     public function getProductId()
@@ -39,6 +73,7 @@ class Inventory
     }
 
     /**
+     * get id of location
      * @return mixed
      */
     public function getLocationId()
@@ -47,6 +82,7 @@ class Inventory
     }
 
     /**
+     * get date of inventory
      * @return mixed
      */
     public function getDate()
@@ -55,6 +91,7 @@ class Inventory
     }
 
     /**
+     * get quantity of product in the inventory
      * @return mixed
      */
     public function getQuantity()
@@ -63,6 +100,7 @@ class Inventory
     }
 
     /**
+     * get location of product locally
      * @return mixed
      */
     public function getLocalLocation()
@@ -75,6 +113,7 @@ class Inventory
     //###################################
 
     /**
+     * set id of inventory
      * @param mixed $inventoryId
      */
     public function setInventoryId($inventoryId)
@@ -83,6 +122,7 @@ class Inventory
     }
 
     /**
+     * set id of product
      * @param mixed $productId
      */
     public function setProductId($productId)
@@ -91,6 +131,7 @@ class Inventory
     }
 
     /**
+     * set id of location of inventory
      * @param mixed $locationId
      */
     public function setLocationId($locationId)
@@ -99,6 +140,7 @@ class Inventory
     }
 
     /**
+     * set date of inventory
      * @param mixed $date
      */
     public function setDate($date)
@@ -107,6 +149,7 @@ class Inventory
     }
 
     /**
+     * set quantity of product in inventory
      * @param mixed $quantity
      */
     public function setQuantity($quantity)
@@ -115,6 +158,7 @@ class Inventory
     }
 
     /**
+     * set location of product locally
      * @param mixed $localLocation
      */
     public function setLocalLocation($localLocation)
