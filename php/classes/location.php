@@ -143,4 +143,22 @@ class Location
         $this->region = $region;
     }
 
+    //###################################
+    //  DB CRUD METHODS
+    //###################################
+    public static function readLocationCityAndState(&$pdo)
+    {
+        $sql = "SELECT LocationId, City, LocationState FROM Location ORDER BY City";
+
+        $results = $pdo->query($sql);
+
+        while($row = $results->fetch(PDO::FETCH_OBJ))
+        {
+            //add whole object into array
+            $data[] = $row;
+        }
+
+        return $data;
+    }
+
 }
