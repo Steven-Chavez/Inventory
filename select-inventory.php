@@ -11,7 +11,7 @@
     $productType = ProductType::readTypeNames($pdo);
 
     session_start();
-    if(!isset($_SESSION['typeId']) || !isset($_SESSION['locationId']))
+    if(isset($_SESSION['typeId']) || isset($_SESSION['locationId']))
     {
         session_unset();
         session_destroy();
