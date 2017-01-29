@@ -187,5 +187,23 @@ class Product
         $stmt->bindParam(':typeId', $this->typeId, PDO::PARAM_INT);
         $stmt->execute();
     }
+
+    public static function readProductsByTypeId(&$pdo, $typeId)
+    {
+
+        $sql = "
+          SELECT ProductId, ProductName, ProductNumber, Color,
+            NumberPerCase, TypeId
+          FROM Product
+          WHERE TypeId=:typeId
+        ";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->bindParam(':typeId', $typeId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
 }
 ?>
