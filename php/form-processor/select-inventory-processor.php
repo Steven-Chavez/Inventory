@@ -9,7 +9,7 @@ $typeId = $_POST["typeId"];
 
 //start session and populate id's
 session_start();
-$_SESSION["LocationId"] = $locationId;
-$_SESSION["TypeId"] = $typeId;
+$_SESSION["locationId"] = $locationId;
+$_SESSION["typeId"] = $typeId;
 
 header("Location: ../../inventory.php");
