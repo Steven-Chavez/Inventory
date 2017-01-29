@@ -2,11 +2,38 @@
     require_once("../../database.php");
     require_once("php/classes/product.php");
 
+    // connect to database and obtain PDO object
     $pdo = new DatabaseConnect();
-
     $pdo = $pdo->getPDO();
 
+    session_start();
+
+    //initialize local variables from $_SESSION
+    $typeId = $_SESSION["typeId"];
+    $locationId = $_SESSION["locationId"];
+
+    //obtain array of product objects
     $productArray = Product::readProductsByTypeId($pdo, 1);
+
+    //handle productId so that we do not inventor repeated products from array
+    if(!isset($_SESSION['productId']))
+    {
+        $_SESSION['productId'] = 0;
+    }
+    else
+    {
+        $_SESSION['productId']++;
+    }
+
+    //Once array is done destroy session and redirect
+    if(sizeof($productArray) == $_SESSION['productId'])
+    {
+        session_unset();
+        session_destroy();
+        header("Location: index.php");
+    }
+
+    $productId = $_SESSION['productId'];
 
 ?>
 <!DOCTYPE html>
@@ -47,11 +74,17 @@
     </nav>
     <div class="col-md-4 col-md-offset-4 col-sm-10 col-sm-offset-1">
         <?php
-            foreach($productArray as $value)
-            {
-                echo "{$value->ProductName}<br>";
-            }
+            echo "<h2>{$productArray[$productId]->ProductName}</h2>"
         ?>
+        <form  action="php/form-processor/product-add-processor.php" method="post">
+            <h3>Quantity:</h3> <br>
+            <input class="form-control" type="number" name="qty"><br><br>
+            <h3>Local Location:</h3> <br>
+            <input class="form-control" type="text" name="local"><br><br>
+            <br><br>
+            <input class="btn-lg" type="submit" value="Submit">
+            <input class="btn-lg" type="reset">
+        </form>
     </div>
 </body>
 </html>
