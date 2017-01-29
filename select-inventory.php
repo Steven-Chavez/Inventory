@@ -3,12 +3,19 @@
     require_once("php/classes/location.php");
     require_once("php/classes/product-type.php");
 
+    // connect to database and obtain PDO object
     $pdo = new DatabaseConnect();
-
     $pdo = $pdo->getPDO();
 
     $location = Location::readLocationCityAndState($pdo);
     $productType = ProductType::readTypeNames($pdo);
+
+    session_start();
+    if(!isset($_SESSION['typeId']) || !isset($_SESSION['locationId']))
+    {
+        session_unset();
+        session_destroy();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
