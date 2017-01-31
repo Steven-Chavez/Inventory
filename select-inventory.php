@@ -64,7 +64,6 @@
                 {
                     echo"<option value=\"{$value->LocationId}\">{$value->City}, 
                             {$value->LocationState}</option>";
-
                 }
                 ?>
             </select><br>

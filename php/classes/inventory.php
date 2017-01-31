@@ -173,7 +173,6 @@ class Inventory
     {
         $date = date("Y-m-d");
 
-
         $sql = "
             INSERT INTO ProductInventory(ProductId, LocationId, 
               InventoryDate, Quantity, LocalLocation)
@@ -186,5 +185,17 @@ class Inventory
         $stmt->bindParam(':quantity', $this->quantity, PDO::PARAM_INT);
         $stmt->bindParam(':location', $this->localLocation, PDO::PARAM_STR);
         $stmt->execute();
+    }
+
+    public static function readInventoryDates(&$pdo)
+    {
+        $sql = "
+            SELECT InventoryDate FROM ProductInventory
+            GROUP BY InventoryDate;
+        ";
+
+        $stmt = $pdo->query($sql);
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        return $stmt->fetchAll();
     }
 }
