@@ -199,7 +199,7 @@ class Inventory
         return $stmt->fetchAll();
     }
 
-    public static function readInventoryProductJOIN(&$pdo)
+    public static function readInventoryProductJOIN(&$pdo, $typeId)
     {
         $sql = "
           SELECT p.ProductName, p.ProductNumber, p.Color, p.NumberPerCase, 
@@ -207,12 +207,12 @@ class Inventory
           FROM Product p
           INNER JOIN ProductInventory i
           ON p.ProductId=i.ProductId
-          WHERE p.TypeId = 1
+          WHERE p.TypeId = :pType
           ORDER BY i.Quantity; 
         ";
 
-        $stmt = $pdo->query($sql);
-        $stmt->setFetchMode(PDO::FETCH_OBJ);
-        return $stmt->fetchAll();
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(":pType", $typeId, PDO::PARAM_STR);
+        $stmt->execute();
     }
 }
