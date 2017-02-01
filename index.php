@@ -18,6 +18,7 @@
 
     $dates = Inventory::readInventoryDates($pdo);
     $types = ProductType::readTypeNames($pdo);
+    $joinByType = Inventory::readInventoryProductJOIN($pdo);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,6 +70,11 @@
                 <input type="submit" value="Submit">
             </form>
         </aside>
+        <main class="col-md-8">
+            <?php
+
+            ?>
+        </main>
     </div>
 </body>
 </html>
