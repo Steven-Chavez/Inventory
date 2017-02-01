@@ -198,4 +198,9 @@ class Inventory
         $stmt->setFetchMode(PDO::FETCH_OBJ);
         return $stmt->fetchAll();
     }
+
+    public static function readInventoryProductJOIN(&$pdo)
+    {
+
+    }
 }
