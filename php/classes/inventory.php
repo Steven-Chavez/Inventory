@@ -212,7 +212,10 @@ class Inventory
         ";
 
         $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
         $stmt->bindParam(":pType", $typeId, PDO::PARAM_STR);
         $stmt->execute();
+
+        return $stmt->fetchAll();
     }
 }

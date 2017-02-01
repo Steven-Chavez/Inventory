@@ -15,10 +15,18 @@
     $pdo = new DatabaseConnect();
     $pdo = $pdo->getPDO();
 
+    session_start();
+
+    //handle product type to display appropriate product type
+    if(!isset($_SESSION["productType"]))
+    {
+        //set default product type
+        $_SESSION["productType"] = 1;
+    }
 
     $dates = Inventory::readInventoryDates($pdo);
     $types = ProductType::readTypeNames($pdo);
-    $joinByType = Inventory::readInventoryProductJOIN($pdo);
+    $joinByType = Inventory::readInventoryProductJOIN($pdo, $_SESSION["productType"]);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,7 +80,11 @@
         </aside>
         <main class="col-md-8">
             <?php
-
+                echo "
+                    <table>
+                        <th>{$joinByType[0]->ProductName}</th>
+                    </table>
+                ";
             ?>
         </main>
     </div>
