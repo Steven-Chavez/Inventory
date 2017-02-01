@@ -95,12 +95,12 @@ class ProductType
 
     public function insertProductType(&$pdo)
     {
-        $SQL = "
+        $sql = "
             INSERT INTO ProductType(TypeName)
             VALUES(:pType)
             ";
 
-        $stmt = $pdo->prepare($SQL);
+        $stmt = $pdo->prepare($sql);
         $stmt->bindParam(":pType", $this->typeName, PDO::PARAM_STR);
         $stmt->execute();
     }
