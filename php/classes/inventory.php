@@ -191,7 +191,8 @@ class Inventory
     {
         $sql = "
             SELECT InventoryDate FROM ProductInventory
-            GROUP BY InventoryDate;
+            GROUP BY InventoryDate
+            ORDER BY InventoryDate DESC;
         ";
 
         $stmt = $pdo->query($sql);
@@ -199,8 +200,9 @@ class Inventory
         return $stmt->fetchAll();
     }
 
-    public static function readInventoryProductJOIN(&$pdo, $typeId)
+    public static function readInventoryProductJOIN(&$pdo, $typeId, $date)
     {
+
         $sql = "
           SELECT p.ProductName, p.ProductNumber, p.Color, p.NumberPerCase, 
 	        p.TypeId, i.InventoryDate, i.Quantity, i.LocalLocation
@@ -208,12 +210,13 @@ class Inventory
           INNER JOIN ProductInventory i
           ON p.ProductId=i.ProductId
           WHERE p.TypeId = :pType
-          ORDER BY i.Quantity; 
+          ORDER BY i.InventoryDate DESC; 
         ";
 
         $stmt = $pdo->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_OBJ);
-        $stmt->bindParam(":pType", $typeId, PDO::PARAM_STR);
+        $stmt->bindParam(":pType", $typeId, PDO::PARAM_INT);
+        //$stmt->bindParam(":iDate", $date, PDO::PARAM_STR);
         $stmt->execute();
 
         return $stmt->fetchAll();
