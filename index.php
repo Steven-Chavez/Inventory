@@ -26,7 +26,7 @@
 
     $dates = Inventory::readInventoryDates($pdo);
     $types = ProductType::readTypeNames($pdo);
-    $joinByType = Inventory::readInventoryProductJOIN($pdo, $_SESSION["productType"]);
+    $joinByType = Inventory::readInventoryProductJOIN($pdo, $_SESSION["productType"], $dates[0]);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,13 +79,35 @@
             </form>
         </aside>
         <main class="col-md-8">
-            <?php
-                echo "
-                    <table>
-                        <th>{$joinByType[0]->ProductName}</th>
-                    </table>
-                ";
-            ?>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>EQI</th>
+                        <th>Color</th>
+                        <th>Qty</th>
+                        <th>Location</th>
+                        <th>Inventory Date</th>
+                    </tr>
+                    <?php
+                        foreach($joinByType as $table)
+                        {
+                            echo "
+                                <tr>
+                                    <td>{$table->ProductName}</td>
+                                    <td>{$table->ProductNumber}</td>
+                                    <td>{$table->Color}</td>
+                                    <td>{$table->Quantity}</tb>
+                                    <td>{$table->LocalLocation}</td>
+                                    <td>{$table->InventoryDate}</td>
+                                </tr> 
+                            ";
+                        }
+                        session_unset();
+                        session_destroy();
+                    ?>
+                </table>
+            </div>
         </main>
     </div>
 </body>
