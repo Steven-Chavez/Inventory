@@ -23,10 +23,18 @@
         //set default product type
         $_SESSION["productType"] = 1;
     }
-
+    
+    if(!isset($_SESSION["inventoryDateIndex"]))
+    {
+        //set default inventory date index
+        $_SESSION["inventoryDateIndex"] = 0;
+    }
+    
+    $dateIndex = $_SESSION["inventoryDateIndex"];
+    
     $dates = Inventory::readInventoryDates($pdo);
     $types = ProductType::readTypeNames($pdo);
-    $joinByType = Inventory::readInventoryProductJOIN($pdo, $_SESSION["productType"], $dates[0]->InventoryDate);
+    $joinByType = Inventory::readInventoryProductJOIN($pdo, $_SESSION["productType"], $dates[$dateIndex]->InventoryDate);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,16 +73,19 @@
     </nav>
     <div class="row">
         <aside  style="padding-left: 2em" class="col-md-2">
-            <form action="" method="post">
-                Date:
+            <form action="php/form-processor/index-processor.php" method="post">
+                Select Inventory by Date:
                 <select class="form-control" name="date">
                     <?php
+                        $i = 0;
                         foreach($dates as $value)
                         {
-                            echo "<option value=\"{$value->InventoryDate}\">{$value->InventoryDate}</option>";
+                            echo "<option value=\"$i\">{$value->InventoryDate}</option>";
+                            $i++;
                         }
                     ?>
                 </select>
+                <br>
                 <input type="submit" value="Submit">
             </form>
         </aside>
