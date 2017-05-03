@@ -26,7 +26,7 @@
 
     $dates = Inventory::readInventoryDates($pdo);
     $types = ProductType::readTypeNames($pdo);
-    $joinByType = Inventory::readInventoryProductJOIN($pdo, $_SESSION["productType"], $dates[0]);
+    $joinByType = Inventory::readInventoryProductJOIN($pdo, $_SESSION["productType"], $dates[0]->InventoryDate);
 ?>
 <!DOCTYPE html>
 <html lang="en">
