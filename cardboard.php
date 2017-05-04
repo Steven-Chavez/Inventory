@@ -1,3 +1,19 @@
+<?php
+    require_once("../../database.php");
+    require_once("php/classes/inventory.php");
+    require_once("php/classes/product-type.php");
+    require_once("php/classes/location.php");
+
+
+    // connect to database and obtain PDO object
+    $pdo = new DatabaseConnect();
+    $pdo = $pdo->getPDO();
+
+    session_start();
+    
+    $location = Location::readLocationCityAndState($pdo);
+    var_dump($location);
+?>  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,24 +49,21 @@
             </div>
         </div><!-- /.container-fluid -->
     </nav>
-    <div class="row">
-        <main class="col-md-6 col-md-offset-4">
-            <div class="row">
-                <button class="btn btn-default btn-lg btn-primary">
-                    Cardboard
-                </button>
-            </div>
-            <div class="row">
-                <button class="btn btn-lg btn-info">
-                    Equipment
-                </button>
-            </div>
-            <div class="row">
-                <button class="btn btn-lg btn-success">
-                    POS
-                </button>
-            </div>
-        </main>
+    <div class="col-md-4 col-md-offset-4 col-sm-10 col-sm-offset-1">
+        <form action="php/form-processor/index-processor.php" method="post">
+            Select Location:
+            <select class="form-control" name="date">
+                <?php
+                    foreach($location as $value)
+                    {
+                        echo "<option value=\"$value->LocationId\">"
+                                . "{$value->LocationState}, {$value->City}</option>";
+                    }
+                ?>
+            </select>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
     </div>
 </body>
 </html>
