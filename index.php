@@ -36,7 +36,9 @@
     $types = ProductType::readTypeNames($pdo);
     $joinByType = Inventory::readInventoryProductJOIN($pdo, $_SESSION["productType"], $dates[$dateIndex]->InventoryDate);
     
-    echo $joinByType[0]->InventoryDate;
+    // format current date for better presentation
+    $dateStr = $joinByType[0]->InventoryDate;
+    $CardboardInvCurrentDate= date("F j, Y", strtotime($dateStr));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,25 +77,14 @@
     </nav>
     <div class="row">
         <aside  style="padding-left: 2em" class="col-md-2">
-            <form action="php/form-processor/index-processor.php" method="post">
-                Select Inventory by Date:
-                <select class="form-control" name="date">
-                    <?php
-                        $i = 0;
-                        foreach($dates as $value)
-                        {
-                            echo "<option value=\"$i\">{$value->InventoryDate}</option>";
-                            $i++;
-                        }
-                    ?>
-                </select>
-                <br>
-                <input type="submit" value="Submit">
-            </form>
+            
         </aside>
         <main class="col-md-8">
             <div class="table-responsive">
-                <h4>Most Current Cardboard Inventory: <?php echo $joinByType[0]->InventoryDate; ?> </h4>
+                <h4>
+                    Most Current Cardboard Inventory: 
+                    <?php echo $CardboardInvCurrentDate; ?> 
+                </h4>
                 <table class="table table-bordered">
                     <tr>
                         <th>Product Name</th>
