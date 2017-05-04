@@ -35,6 +35,8 @@
     $dates = Inventory::readInventoryDates($pdo);
     $types = ProductType::readTypeNames($pdo);
     $joinByType = Inventory::readInventoryProductJOIN($pdo, $_SESSION["productType"], $dates[$dateIndex]->InventoryDate);
+    
+    echo $joinByType[0]->InventoryDate;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -91,6 +93,7 @@
         </aside>
         <main class="col-md-8">
             <div class="table-responsive">
+                <h4>Most Current Cardboard Inventory: <?php echo $joinByType[0]->InventoryDate; ?> </h4>
                 <table class="table table-bordered">
                     <tr>
                         <th>Product Name</th>
@@ -98,7 +101,6 @@
                         <th>Color</th>
                         <th>Qty</th>
                         <th>Location</th>
-                        <th>Inventory Date</th>
                     </tr>
                     <?php
                         foreach($joinByType as $table)
@@ -110,7 +112,6 @@
                                     <td>{$table->Color}</td>
                                     <td>{$table->Quantity}</tb>
                                     <td>{$table->LocalLocation}</td>
-                                    <td>{$table->InventoryDate}</td>
                                 </tr> 
                             ";
                         }
