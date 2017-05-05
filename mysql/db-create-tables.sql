@@ -37,7 +37,7 @@ CREATE TABLE InventoryLocations
     PRIMARY KEY(InventoryLoactionId),
     CONSTRAINT fk_locationId FOREIGN KEY (LocationId)
         REFERENCES Locations(LocationId),
-    CONSTRAINT uc_locationIdandName UNIQUE(LocationId, LocationName)
+    CONSTRAINT uc_locationIdandName UNIQUE (LocationId, LocationName)
 );
 
 -- Holds the categories of products (i.e. TMD,
@@ -45,7 +45,26 @@ CREATE TABLE InventoryLocations
 CREATE TABLE ProductCategories
 (
     CategoryId int NOT NULL AUTO_INCREMENT,
-    CategoryName int NOT NULL UNIQUE
+    CategoryName int NOT NULL UNIQUE,
+    TypeId int NOT NULL,
+    PRIMARY KEY(CategoryId),
+    CONSTRAINT fk_productTypes FOREIGN KEY (TypeId)
+        REFERENCES ProductTypes(TypeId)
+);
+
+-- Holds information of specific products (i.e.
+-- (Low Profile TMD, 28" Weekender, Mini-Weekender)
+CREATE TABLE Products
+(
+    ProductId int NOT NULL AUTO_INCREMENT,
+    ProductName varchar(50) NOT NULL,
+    ProductNumber varchar(30) NOT NULL,
+    Color varchar(30),
+    NumberPerCase int NOT NULL,
+    NumberPerPallet int NOT NULL,
+    CategoryId int NOT NULL,
+    CONSTRAINT fk_products_categoryId FOREIGN KEY(CategoryId)
+        REFERENCES ProductCategories(CategoryId)
 );
 
 
