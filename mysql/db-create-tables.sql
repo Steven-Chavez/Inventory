@@ -9,7 +9,7 @@
 CREATE TABLE ProductTypes
 (
     TypeId int NOT NULL AUTO_INCREMENT,
-    TypeName varchar(30) UNIQUE,
+    TypeName varchar(30) NOT NULL UNIQUE,
     PRIMARY KEY(TypeId)
 );
 
@@ -34,7 +34,7 @@ CREATE TABLE InventoryLocations
     InventoryLocationId int NOT NULL AUTO_INCREMENT,
     LocationId int NOT NULL,
     LocationName varchar(30) NOT NULL,
-    PRIMARY KEY(InventoryLoactionId),
+    PRIMARY KEY(InventoryLocationId),
     CONSTRAINT fk_locationId FOREIGN KEY (LocationId)
         REFERENCES Locations(LocationId),
     CONSTRAINT uc_locationIdandName UNIQUE (LocationId, LocationName)
@@ -77,6 +77,7 @@ CREATE TABLE ProductInventories
     Quantity int NOT NULL,
     ProductId int NOT NULL,
     InventoryLocationId int NOT NULL,
+    PRIMARY KEY(InventoryId),
     CONSTRAINT fk_inventories_productId FOREIGN KEY(ProductId)
         REFERENCES Products(ProductId),
     CONSTRAINT fk_inventories_locationId FOREIGN KEY(InventoryLocationId)
@@ -84,6 +85,6 @@ CREATE TABLE ProductInventories
     CONSTRAINT uc_productInventory 
         UNIQUE(ProductId, InventoryLocationId,InventoryDate)
     
-)
+);
 
 
