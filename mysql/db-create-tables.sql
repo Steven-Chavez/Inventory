@@ -2,6 +2,7 @@
  * Author:  Steven Chavez
  * Created: May 5, 2017
  * File: db-create-tables.sql
+ * Version: 2.0
  */
 
 -- Holds the type of product (i.e. 
