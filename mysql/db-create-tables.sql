@@ -13,12 +13,12 @@ CREATE TABLE ProductTypes
     PRIMARY KEY(TypeId)
 );
 
--- Holds location of work site (i.e.
+-- Holds the location of a work site (i.e.
 -- warehouse, p.e.c., bin).
 CREATE TABLE Locations
 (
     LocationId int NOT NULL AUTO_INCREMENT,
-    Address varchar (40) NOT NULL,
+    Address varchar (50) NOT NULL,
     City varchar(30) NOT NULL,
     LocationState varchar(30) NOT NULL,
     ZipCode varchar(10) NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE ProductCategories
         REFERENCES ProductTypes(TypeId)
 );
 
--- Holds information of specific products (i.e.
+-- Holds the information of specific products (i.e.
 -- (Low Profile TMD, 28" Weekender, Mini-Weekender)
 CREATE TABLE Products
 (
@@ -63,8 +63,27 @@ CREATE TABLE Products
     NumberPerCase int NOT NULL,
     NumberPerPallet int NOT NULL,
     CategoryId int NOT NULL,
+    PRIMARY KEY(ProductId),
     CONSTRAINT fk_products_categoryId FOREIGN KEY(CategoryId)
         REFERENCES ProductCategories(CategoryId)
 );
+
+-- Holds the different inventories of products in
+-- different locations
+CREATE TABLE ProductInventories
+(
+    InventoryId int NOT NULL AUTO_INCREMENT,
+    InventoryDate date NOT NULL,
+    Quantity int NOT NULL,
+    ProductId int NOT NULL,
+    InventoryLocationId int NOT NULL,
+    CONSTRAINT fk_inventories_productId FOREIGN KEY(ProductId)
+        REFERENCES Products(ProductId),
+    CONSTRAINT fk_inventories_locationId FOREIGN KEY(InventoryLocationId)
+        REFERENCES InventoryLocations(InventoryLocationId),
+    CONSTRAINT uc_productInventory 
+        UNIQUE(ProductId, InventoryLocationId,InventoryDate)
+    
+)
 
 
