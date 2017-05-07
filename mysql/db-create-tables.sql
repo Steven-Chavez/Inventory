@@ -53,6 +53,16 @@ CREATE TABLE ProductCategories
         REFERENCES ProductTypes(TypeId)
 );
 
+-- Holds the product image info
+CREATE TABLE ProductImages
+(
+    ImageId int NOT NULL AUTO_INCREMENT,
+    ImageType varchar(7) NOT NULL,
+    ImageName varchar(40) NOT NULL,
+    ImageURL varchar(300) NOT NULL,
+    PRIMARY KEY(ImageId)
+);
+
 -- Holds the information of specific products (i.e.
 -- (Low Profile TMD, 28" Weekender, Mini-Weekender)
 CREATE TABLE Products
@@ -64,9 +74,12 @@ CREATE TABLE Products
     NumberPerCase int NOT NULL,
     NumberPerPallet int NOT NULL,
     CategoryId int NOT NULL,
+    ImageId int,
     PRIMARY KEY(ProductId),
     CONSTRAINT fk_products_categoryId FOREIGN KEY(CategoryId)
-        REFERENCES ProductCategories(CategoryId)
+        REFERENCES ProductCategories(CategoryId),
+    CONSTRAINT fk_products_imageId FOREIGN KEY(ImageId)
+        REFERENCES ProductImages(ImageId)
 );
 
 -- Holds the different inventories of products in
