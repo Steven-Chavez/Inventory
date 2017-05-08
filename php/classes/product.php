@@ -242,7 +242,7 @@ class Product
           SELECT ProductId, ProductName, ProductNumber, Color,
             NumberPerCase, CategoryId
           FROM Products
-          WHERE TypeId=:categoryId
+          WHERE CategoryId=:categoryId
         ";
 
         $stmt = $pdo->prepare($sql);
