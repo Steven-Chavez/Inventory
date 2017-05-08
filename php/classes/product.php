@@ -5,7 +5,7 @@
  * Author: Steven
  * Date: 1/25/2017
  * Time: 6:51 PM
- * Version: 1.0
+ * Version: 2.0
  */
 
 class Product
@@ -31,9 +31,17 @@ class Product
      */
     private $numPerCase;
     /**
-     * @var type id identifies product type; foreign key
+     * @var number of cases per pallet 
      */
-    private $typeId;
+    private $numPerPallet;
+    /**
+     * @var category id identifies product type; foreign key
+     */
+    private $categoryId;
+    /**
+     * @var image id; foreign key
+     */
+    private $imageId;
 
     //###################################
     //  CONSTRUCTOR
@@ -43,14 +51,17 @@ class Product
      * Product constructor.
      */
     public function __construct($productId, $productName, $productNumber,
-                                $color, $numPerCase, $typeId)
+                                $color, $numPerCase, $numPerPallet,
+                                $categoryId, $imageId)
     {
         $this->setProductId($productId);
         $this->setProductName($productName);
         $this->setProductNumber($productNumber);
         $this->setColor($color);
         $this->setNumPerCase($numPerCase);
-        $this->setTypeId($typeId);
+        $this->setNumPerPallet($numPerPallet);
+        $this->setCategoryId($categoryId);
+        $this->setImageId($imageId);
     }
 
     //###################################
@@ -101,14 +112,32 @@ class Product
     {
         return $this->numPerCase;
     }
+    
+    /**
+     * get number of cases per pallet
+     * @return number
+     */
+    public function getNumPerPallet()
+    {
+        return $this->numPerPallet;
+    }
 
     /**
-     * get type id of product
-     * @return type
+     * get category id of product
+     * @return id
      */
-    public function getTypeId()
+    public function getCategoryId()
     {
-        return $this->typeId;
+        return $this->categoryId;
+    }
+    
+    /**
+     * get image id of product
+     * @return id
+     */
+    public function getImageId()
+    {
+        return $this->imageId;
     }
 
     //###################################
@@ -117,16 +146,16 @@ class Product
 
     /**
      * Sets product id
-     * @param $productId
+     * @param int $productId
      */
-    public  function setProductId($productId)
+    public function setProductId($productId)
     {
         $this->productId = $productId;
     }
 
     /**
      * Sets product name
-     * @param $productName
+     * @param string $productName
      */
     public function setProductName($productName)
     {
@@ -135,7 +164,7 @@ class Product
 
     /**
      * Sets product number
-     * @param $productNumber
+     * @param string $productNumber
      */
     public function setProductNumber($productNumber)
     {
@@ -144,7 +173,7 @@ class Product
 
     /**
      * Sets color
-     * @param $color
+     * @param string $color
      */
     public function setColor($color)
     {
@@ -153,20 +182,34 @@ class Product
 
     /**
      * Sets number of product per case
-     * @param $numPerCase
+     * @param int $numPerCase
      */
     public function setNumPerCase($numPerCase)
     {
         $this->numPerCase = $numPerCase;
     }
+    
+    /**
+     * Sets number of cases per pallet
+     * @param int $numPerPallet
+     */
+    public function setNumPerPallet($numPerPallet)
+    {
+        $this->numPerPallet = $numPerPallet;
+    }
 
     /**
-     * Sets type of product
-     * @param $typeId
+     * Sets category id of product
+     * @param int $categoryId
      */
-    public function setTypeId($typeId)
+    public function setCategoryId($categoryId)
     {
-        $this->typeId = $typeId;
+        $this->categoryId = $categoryId;
+    }
+    
+    public function setImageId($imageId)
+    {
+        $this->imageId = $imageId;
     }
 
     //###################################
@@ -175,32 +218,36 @@ class Product
     public function insert(&$pdo)
     {
         $sql = "
-            INSERT INTO Product(ProductName, ProductNumber,
-                              Color, NumberPerCase, TypeID) 
-            VALUES(:pName, :pNumber, :color, :percase, :typeId)";
+            INSERT INTO Products(ProductName, ProductNumber,
+                              Color, NumberPerCase, NumberPerPallet, 
+                              CategoryId, ImageId) 
+            VALUES(:pName, :pNumber, :color, :percase, :perpallet, 
+                   :categoryId, :imgId)";
 
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':pName', $this->productName, PDO::PARAM_STR);
         $stmt->bindParam(':pNumber', $this->productNumber, PDO::PARAM_STR);
         $stmt->bindParam(':color', $this->color, PDO::PARAM_STR);
         $stmt->bindParam(':percase', $this->numPerCase, PDO::PARAM_INT);
-        $stmt->bindParam(':typeId', $this->typeId, PDO::PARAM_INT);
+        $stmt->bindParam(':perpallet', $this->numPerPallet, PDO::PARAM_INT);
+        $stmt->bindParam(':categoryId', $this->categoryId, PDO::PARAM_INT);
+        $stmt->bindParam(':imgId', $this->imageId, PDO::PARAM_INT);
         $stmt->execute();
     }
 
-    public static function readProductsByTypeId(&$pdo, $typeId)
+    public static function readProductsByCategoryId(&$pdo, $categoryId)
     {
 
         $sql = "
           SELECT ProductId, ProductName, ProductNumber, Color,
-            NumberPerCase, TypeId
-          FROM Product
-          WHERE TypeId=:typeId
+            NumberPerCase, CategoryId
+          FROM Products
+          WHERE TypeId=:categoryId
         ";
 
         $stmt = $pdo->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_OBJ);
-        $stmt->bindParam(':typeId', $typeId, PDO::PARAM_INT);
+        $stmt->bindParam(':categoryId', $categoryId, PDO::PARAM_INT);
         $stmt->execute();
 
         return $stmt->fetchAll();
