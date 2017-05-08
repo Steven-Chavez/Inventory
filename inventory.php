@@ -13,7 +13,7 @@
     $locationId = $_SESSION["locationId"];
 
     //obtain array of product objects
-    $productArray = Product::readProductsByTypeId($pdo, 1);
+    $productArray = Product::readProductsByCategoryId($pdo, 1);
 
     //handle productId so that we do not inventor repeated products from array
     if(!isset($_SESSION['index']))
