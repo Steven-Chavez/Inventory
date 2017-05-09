@@ -143,15 +143,6 @@ class Inventory
         $this->quantity = $quantity;
     }
 
-    /**
-     * set location of product locally
-     * @param mixed $localLocation
-     */
-    public function setLocalLocation($localLocation)
-    {
-        $this->localLocation = $localLocation;
-    }
-
     //###################################
     //  DB CRUD METHODS
     //###################################
