@@ -152,15 +152,14 @@ class Inventory
 
         $sql = "
             INSERT INTO ProductInventory(ProductId, LocationId, 
-              InventoryDate, Quantity, LocalLocation)
-            VALUES(:productId, :locationId, :iDate, :quantity, :location)
+              InventoryDate, Quantity)
+            VALUES(:productId, :locationId, :iDate, :quantity)
         ";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':productId', $this->productId, PDO::PARAM_INT);
         $stmt->bindParam(':locationId', $this->locationId, PDO::PARAM_INT);
         $stmt->bindParam(':iDate', $date, PDO::PARAM_STR);
         $stmt->bindParam(':quantity', $this->quantity, PDO::PARAM_INT);
-        $stmt->bindParam(':location', $this->localLocation, PDO::PARAM_STR);
         $stmt->execute();
     }
 
