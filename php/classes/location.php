@@ -126,13 +126,21 @@ class Location
 
     /**
      * set location id for location
-     * @param mixed $locationId
+     * @param int $locationId
      */
     public function setLocationId($locationId)
     {
         $this->locationId = $locationId;
     }
-
+    
+    /**
+     * set address for location
+     * @param string $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
     /**
      * set city for location
      * @param mixed $city
@@ -149,6 +157,15 @@ class Location
     public function setState($state)
     {
         $this->state = $state;
+    }
+    
+    /**
+     * set zip code for location
+     * @param int $zipCode
+     */
+    public function setZipCode($zipCode)
+    {
+        $this->zipCode = $zipCode;
     }
 
     /**
