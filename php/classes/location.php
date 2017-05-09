@@ -17,6 +17,10 @@ class Location
      */
     private $locationId;
     /**
+     * @var address of location
+     */
+    private $address;
+    /**
      * @var city of location
      */
     private $city;
@@ -24,6 +28,10 @@ class Location
      * @var state of location
      */
     private $state;
+    /**
+     * @var zip code for location 
+     */
+    private $zipCode;
     /**
      * @var zone of location
      */
@@ -51,16 +59,25 @@ class Location
     //###################################
     /**
      * get id of location
-     * @return mixed
+     * @return int
      */
     public function getLocationId()
     {
         return $this->locationId;
     }
+    
+    /**
+     * get address of location
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
 
     /**
      * get city of location
-     * @return mixed
+     * @return string
      */
     public function getCity()
     {
@@ -74,6 +91,15 @@ class Location
     public function getState()
     {
         return $this->state;
+    }
+    
+    /**
+     * get zip code of location
+     * @return string
+     */
+    public function getZipCode()
+    {
+        return $this->zipCode;
     }
 
     /**
