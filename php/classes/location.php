@@ -203,5 +203,4 @@ class Location
 
         return $data;
     }
-
 }

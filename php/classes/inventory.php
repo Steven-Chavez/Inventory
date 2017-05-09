@@ -32,23 +32,18 @@ class Inventory
      * @var quantity of product in inventory
      */
     private $quantity;
-    /**
-     * @var location of product locally
-     */
-    private $localLocation;
 
     //###################################
     //  CONSTRUCTOR
     //###################################
-    public function __construct( $inventoryId, $productId,
-     $locationId, $date, $quantity, $localLocation)
+    public function __construct($inventoryId, $productId,
+     $locationId, $date, $quantity)
     {
         $this->setInventoryId($inventoryId);
         $this->setProductId($productId);
         $this->setLocationId($locationId);
         $this->setDate($date);
         $this->setQuantity($quantity);
-        $this->setLocalLocation($localLocation);
     }
 
     //###################################
@@ -97,15 +92,6 @@ class Inventory
     public function getQuantity()
     {
         return $this->quantity;
-    }
-
-    /**
-     * get location of product locally
-     * @return mixed
-     */
-    public function getLocalLocation()
-    {
-        return $this->localLocation;
     }
 
     //###################################
