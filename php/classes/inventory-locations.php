@@ -31,7 +31,10 @@ class InventoryLocation
     //###################################
     //  CONSTRUCTOR
     //###################################
-
+    public function _construct()
+    {
+        
+    }
 
     //###################################
     //  ACCESSOR METHODS
