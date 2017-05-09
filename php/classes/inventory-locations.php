@@ -39,7 +39,32 @@ class InventoryLocation
     //###################################
     //  ACCESSOR METHODS
     //###################################
-
+    /**
+     * get id for inventory location.
+     * @return int
+     */
+    public function getInventoryLocationId()
+    {
+        return $this->inventoryLocationId;
+    }
+    
+    /**
+     * get id for location
+     * @return string
+     */
+    public function getLocationId() 
+    {
+        return $this->locationId;
+    }
+    
+    /**
+     * get name of inventory location
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 
     //###################################
     //  MUTATOR METHODS
