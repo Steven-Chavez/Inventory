@@ -1,6 +1,7 @@
 <?php
 /**
  * PDO enabled container for product type authentication
+ * 
  * Author: Steven
  * Date: 1/26/2017
  * Time: 1:28 PM
