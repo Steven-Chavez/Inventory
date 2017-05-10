@@ -31,9 +31,12 @@ class InventoryLocation
     //###################################
     //  CONSTRUCTOR
     //###################################
-    public function _construct()
+    public function _construct($inventoryLocationId, 
+            $locationId, $name)
     {
-        
+        $this->setInventoryLocationId($inventoryLocationId);
+        $this->setLocationId($locationId);
+        $this->setName($name);
     }
 
     //###################################
@@ -69,7 +72,32 @@ class InventoryLocation
     //###################################
     //  MUTATOR METHODS
     //###################################
-
+    /**
+     * set inventory location id
+     * @param int $inventoryLocationId
+     */
+    public function setInventoryLocationId($inventoryLocationId)
+    {
+        $this->inventoryLocationId = $inventoryLocationId;
+    }
+    
+    /**
+     * set location id
+     * @param int $locationId
+     */
+    public function setLocationId($locationId)
+    {
+        $this->locationId = $locationId;
+    }
+    
+    /**
+     * set name for inventory location
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
 
     //###################################
     //  DB CRUD METHODS
