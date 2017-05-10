@@ -30,7 +30,12 @@ class Category
     //###################################
     //  CONSTRUCTOR
     //###################################
-
+    public function _construct($id, $name, $typeId)
+    {
+        $this->setId($id);
+        $this->setName($name);
+        $this->setTypeId($typeId);
+    }
 
     //###################################
     //  ACCESSOR METHODS
@@ -40,7 +45,32 @@ class Category
     //###################################
     //  MUTATOR METHODS
     //###################################
-
+    /**
+     * set category id
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+    
+    /**
+     * set name for product category
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+    
+    /**
+     * set type id for product
+     * @param type $typeId
+     */
+    public function setTypeId($typeId)
+    {
+        $this->typeId = $typeId;
+    }
 
     //###################################
     //  DB CRUD METHODS
