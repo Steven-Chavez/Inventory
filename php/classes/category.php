@@ -40,8 +40,33 @@ class Category
     //###################################
     //  ACCESSOR METHODS
     //###################################
-
+    /**
+     * get id for category
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
     
+    /**
+     * get name of product category
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+    
+    /**
+     * get type id of product
+     * @return int
+     */
+    public function getTypeId()
+    {
+        return $this->typeId;
+    }
+
     //###################################
     //  MUTATOR METHODS
     //###################################
