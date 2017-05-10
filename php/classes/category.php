@@ -1,5 +1,6 @@
 <?php
 /**
+ * PDO enabled container for product category authentication
  * 
  * Author: Steven
  * Date: 5/9/2017
@@ -13,7 +14,18 @@ class Category
     //###################################
     //  FIELDS
     //###################################
-   
+    /**
+     * @var id for product category 
+     */
+    private $id;
+    /**
+     *@var name of product category
+     */
+    private $name;
+    /**
+     * @var id for product type
+     */
+    private $typeId;
 
     //###################################
     //  CONSTRUCTOR
