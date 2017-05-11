@@ -27,16 +27,21 @@ class InventoryLocation
      * @var name of inventory location. 
      */
     private $name;
+    /**
+     * @var section of inventory location 
+     */
+    private $section;
 
     //###################################
     //  CONSTRUCTOR
     //###################################
     public function _construct($inventoryLocationId, 
-            $locationId, $name)
+            $locationId, $name, $section)
     {
         $this->setInventoryLocationId($inventoryLocationId);
         $this->setLocationId($locationId);
         $this->setName($name);
+        $this->setSection($section);
     }
 
     //###################################
@@ -68,6 +73,15 @@ class InventoryLocation
     {
         return $this->name;
     }
+    
+    /**
+     * get section of inventory location
+     * @return string
+     */
+    public function getSection()
+    {
+        return $this->section;
+    }
 
     //###################################
     //  MUTATOR METHODS
@@ -97,6 +111,15 @@ class InventoryLocation
     public function setName($name)
     {
         $this->name = $name;
+    }
+    
+    /**
+     * set section for inventory location
+     * @param string $section
+     */
+    public function setSection($section)
+    {
+        $this->section = $section;
     }
 
     //###################################

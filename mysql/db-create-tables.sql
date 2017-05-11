@@ -35,6 +35,7 @@ CREATE TABLE InventoryLocations
     InventoryLocationId int NOT NULL AUTO_INCREMENT,
     LocationId int NOT NULL,
     LocationName varchar(30) NOT NULL,
+    Section varchar(30),
     PRIMARY KEY(InventoryLocationId),
     CONSTRAINT fk_locationId FOREIGN KEY (LocationId)
         REFERENCES Locations(LocationId),
