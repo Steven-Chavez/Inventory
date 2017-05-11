@@ -1,11 +1,20 @@
+<?php
+    require_once("../../database.php");
+    require_once("php/classes/product-type.php");
+
+    $pdo = new DatabaseConnect();
+
+    $pdo = $pdo->getPDO();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Add, delete, and edit product types from the DB">
+    <meta name="author" content="Steven Chavez">
     <title>Add Product Type</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -33,14 +42,14 @@
     </nav>
     <div class="col-md-4 col-md-offset-4 col-sm-10 col-sm-offset-1">
         <h3>Add Product Type</h3><br>
-        <form  action="php/form-processor/product-add-processor.php" method="post">
+        <form  action="php/form-processor/edit-product-type-processor.php" method="post">
             Product Type: <br>
             <input class="form-control" type="text" name="add"><br>
             <input type="submit" value="Submit">
         </form>
         <br>
         <h3>Delete Product Type</h3><br>
-        <form  action="php/form-processor/product-add-processor.php" method="post">
+        <form  action="php/form-processor/edit-product-type-processor.php" method="post">
             Product Type: <br>
             <select class="form-control" name="delete">
                 <?php
@@ -50,7 +59,7 @@
         </form>
         <br>
         <h3>Edit Product Type</h3><br>
-        <form  action="php/form-processor/product-add-processor.php" method="post">
+        <form  action="php/form-processor/edit-product-type-processor.php" method="post">
             Select Product Type To Edit: <br>
             <select class="form-control" name="edit">
                 <?php
