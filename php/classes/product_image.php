@@ -42,9 +42,45 @@ class Image
         $this->setName($name);
         $this->setURL($url);
     }
+    
     //###################################
     //  ACCESSOR METHODS
     //###################################
+    /**
+     * get id for product image
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    
+    /**
+     * get type of image file
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+    
+    /**
+     * get name of image file
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+    
+    /**
+     * get URL for product image location
+     * @return string
+     */
+    public function getURL()
+    {
+        return $this->url;
+    }
 
     //###################################
     //  MUTATOR METHODS
