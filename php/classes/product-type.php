@@ -95,10 +95,10 @@ class ProductType
         return $data;
     }
 
-    public function insertProductType(&$pdo)
+    public function insert(&$pdo)
     {
         $sql = "
-            INSERT INTO ProductType(TypeName)
+            INSERT INTO ProductTypes(TypeName)
             VALUES(:pType)
             ";
 
