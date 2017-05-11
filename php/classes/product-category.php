@@ -6,7 +6,7 @@
  * Date: 5/9/2017
  * Time: 10:09 PM
  * Version: 1.0
- * File: category.php
+ * File: product-category.php
  */
 
 class Category

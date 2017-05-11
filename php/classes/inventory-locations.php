@@ -3,7 +3,7 @@
  * PDO enabled container for inventory location 
  * type authentication
  * 
- * Author: Steven
+ * Author: Steven Chavez
  * Date: 5/8/2017
  * Time: 6:19PM
  * Version: 1.0
