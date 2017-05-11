@@ -35,7 +35,13 @@ class Image
     //###################################
     //  CONSTRUCTOR
     //###################################
-
+    public function _construct($id, $type, $name, $url)
+    {
+        $this->setId($id);
+        $this->setType($type);
+        $this->setName($name);
+        $this->setURL($url);
+    }
     //###################################
     //  ACCESSOR METHODS
     //###################################
