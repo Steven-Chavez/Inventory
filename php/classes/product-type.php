@@ -109,7 +109,7 @@ class ProductType
     }
     
     // Deletes product type by id from db 
-    public function delete(&$pdo, $typeId) 
+    public static function delete(&$pdo, $typeId) 
     {
         $sql = "
             DELETE FROM ProductTypes
