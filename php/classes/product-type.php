@@ -95,6 +95,7 @@ class ProductType
         return $data;
     }
 
+    // Inserts product type into db
     public function insert(&$pdo)
     {
         $sql = "
@@ -104,6 +105,19 @@ class ProductType
 
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(":pType", $this->typeName, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+    
+    // Deletes product type by id from db 
+    public function delete(&$pdo, $typeId) 
+    {
+        $sql = "
+            DELETE FROM ProductTypes
+            WHERE TypeId = :id
+                ";
+        
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(":id", $typeId, PDO::PARAM_INT);
         $stmt->execute();
     }
 }
