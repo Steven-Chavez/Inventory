@@ -6,7 +6,7 @@
 
     $pdo = $pdo->getPDO();
 
-    $productType = ProductType::readTypeNames($pdo);
+    $productType = ProductType::readType($pdo);
 ?>
 <!DOCTYPE html>
 <html lang="en">

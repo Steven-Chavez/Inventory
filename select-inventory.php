@@ -8,7 +8,7 @@
     $pdo = $pdo->getPDO();
 
     $location = Location::readLocationCityAndState($pdo);
-    $productType = ProductType::readTypeNames($pdo);
+    $productType = ProductType::readType($pdo);
 
     session_start();
     if(isset($_SESSION['typeId']) || isset($_SESSION['locationId']))

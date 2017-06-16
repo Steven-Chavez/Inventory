@@ -81,15 +81,15 @@ class ProductType
     //###################################
     //  DB CRUD METHODS
     //###################################
-    public static function readTypeNames(&$pdo)
+    public static function readType(&$pdo)
     {
-        $SQL = "SELECT TypeName FROM ProductType";
+        $SQL = "SELECT TypeId, TypeName FROM ProductTypes";
 
         $results = $pdo->query($SQL);
 
         while($row = $results->fetch(PDO::FETCH_OBJ))
         {
-            $data[] = $row->TypeName;
+            $data[] = $row;
         }
 
         return $data;

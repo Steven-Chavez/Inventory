@@ -33,7 +33,7 @@
     $dateIndex = $_SESSION["inventoryDateIndex"];
     
     $dates = Inventory::readInventoryDates($pdo);
-    $types = ProductType::readTypeNames($pdo);
+    $types = ProductType::readType($pdo);
     $joinByType = Inventory::readInventoryProductJOIN($pdo, $_SESSION["productType"], $dates[$dateIndex]->InventoryDate);
     
     // format current date for better presentation
