@@ -26,10 +26,13 @@
 
     if(isset($_POST["delete"]))
     {
-        echo "delete";
+        $delete = $_POST["delete"];
+        ProductType::delete($pdo, $delete);
     }
 
     if(isset($_POST["editChange"]))
     {
         echo "edit";
     }
+    
+    header("Location: ../../edit-product-type.php");
