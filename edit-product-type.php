@@ -5,7 +5,7 @@
     $pdo = new DatabaseConnect();
 
     $pdo = $pdo->getPDO();
-
+    $productType = ProductType::readType($pdo);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,6 +53,11 @@
             Product Type: <br>
             <select class="form-control" name="delete">
                 <?php
+                // Populate drop down box with values from db
+                foreach ($productType as $value)
+                {
+                    echo "<option value=\"{$value->TypeId}\">{$value->TypeName}</option>";
+                }
                 ?>
             </select><br>
             <input type="submit" value="Submit">
