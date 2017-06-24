@@ -9,6 +9,16 @@
  * real inventories. 
  */
 
+INSERT INTO ProductTypes (TypeName)
+VALUES ('Equipment'), ('Cardboard'), ('POS');
+
+INSERT INTO ProductCategories (CategoryName, TypeId)
+VALUES 
+    ('Weekender', 2),
+    ('TMD', 2),
+    ('FEM', 1),
+    ('Stripping', 3);
+
 INSERT INTO Products (ProductName, ProductNumber, Color, 
     NumberPerCase, NumberPerPallet)
 VALUES 
@@ -28,6 +38,7 @@ VALUES
     ('Stripping', 'RED203', 'Red', 20, NULL),
     ('Stripping', 'BLUE202', 'Blue', 20, NULL),
     ('Extrusions', 'EX222', NULL, 10, NULL);
+
     
 
     
