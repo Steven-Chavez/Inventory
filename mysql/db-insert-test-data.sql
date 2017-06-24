@@ -29,7 +29,7 @@ VALUES
      'Albuquerque', 'Mountain');
 
 -- InventoryLoactions
-INSERT INTO InventoryLoactions (LocationId, LocationName)
+INSERT INTO InventoryLocations (LocationId, LocationName)
 VALUES
     (1, 'Warehouse (KnockDowns)'),
     (1, 'Warehouse (PickByLights)'),
