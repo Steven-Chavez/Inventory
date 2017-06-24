@@ -21,11 +21,21 @@ VALUES
     ('FEM', 1),
     ('Stripping', 3);
 
+-- Locations
 INSERT INTO Locations (Address, City, LocationState, 
     ZipCode, Zone, Region)
 VALUES
     ('22 Anderson lane NW', 'Clovis', 'New Mexico', '87222', 
      'Albuquerque', 'Mountain');
+
+-- InventoryLoactions
+INSERT INTO InventoryLoactions (LocationId, LocationName)
+VALUES
+    (1, 'Warehouse (KnockDowns)'),
+    (1, 'Warehouse (PickByLights)'),
+    (1, 'Trailer A'),
+    (1, 'Trailer B'),
+    (1, 'Trailer C');
 
 -- Products
 INSERT INTO Products (ProductName, ProductNumber, Color, 
