@@ -72,9 +72,9 @@ CREATE TABLE Products
     ProductName varchar(50) NOT NULL,
     ProductNumber varchar(30) NOT NULL,
     Color varchar(30),
-    NumberPerCase int NOT NULL,
-    NumberPerPallet int NOT NULL,
-    CategoryId int NOT NULL,
+    NumberPerCase int,
+    NumberPerPallet int,
+    CategoryId int,
     ImageId int,
     PRIMARY KEY(ProductId),
     CONSTRAINT fk_products_categoryId FOREIGN KEY(CategoryId)
