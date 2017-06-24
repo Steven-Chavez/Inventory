@@ -9,9 +9,11 @@
  * real inventories. 
  */
 
+-- ProductTypes
 INSERT INTO ProductTypes (TypeName)
 VALUES ('Equipment'), ('Cardboard'), ('POS');
 
+-- ProductCategories
 INSERT INTO ProductCategories (CategoryName, TypeId)
 VALUES 
     ('Weekender', 2),
@@ -19,6 +21,13 @@ VALUES
     ('FEM', 1),
     ('Stripping', 3);
 
+INSERT INTO Locations (Address, City, LocationState, 
+    ZipCode, Zone, Region)
+VALUES
+    ('22 Anderson lane NW', 'Clovis', 'New Mexico', '87222', 
+     'Albuquerque', 'Mountain');
+
+-- Products
 INSERT INTO Products (ProductName, ProductNumber, Color, 
     NumberPerCase, NumberPerPallet)
 VALUES 
