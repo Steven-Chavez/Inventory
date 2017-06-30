@@ -47,7 +47,7 @@ CREATE TABLE InventoryLocations
 CREATE TABLE ProductCategories
 (
     CategoryId int NOT NULL AUTO_INCREMENT,
-    CategoryName int NOT NULL UNIQUE,
+    CategoryName varchar(50) NOT NULL UNIQUE,
     TypeId int NOT NULL,
     PRIMARY KEY(CategoryId),
     CONSTRAINT fk_productTypes FOREIGN KEY (TypeId)
