@@ -58,6 +58,16 @@ VALUES
     ('Stripping', 'BLUE202', 'Blue', 20, NULL),
     ('Extrusions', 'EX222', NULL, 10, NULL);
 
+-- ProductInventories
+INSERT INTO ProductInventories (InventoryDate, Quantity, 
+    ProductId, InventoryLocationId)
+VALUES
+    -- Warehouse (KnockDowns)
+    ('2017-06-29', 40, 1, 1),
+    ('2017-06-29', 55, 2, 1),
+    ('2017-06-29', 80, 3, 1),
+    ('2017-06-29', 63, 4, 1),
+    ('2017-06-29', 73, 5, 1),
     
 
     
