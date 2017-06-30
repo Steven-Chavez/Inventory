@@ -39,24 +39,24 @@ VALUES
 
 -- Products
 INSERT INTO Products (ProductName, ProductNumber, Color, 
-    NumberPerCase, NumberPerPallet)
+    NumberPerCase, NumberPerPallet, CategoryId)
 VALUES 
     -- Cardboard
-    ('18" 4-Shelf Weekender', '20226', 'Blue', 5, 25),
-    ('28" 4-Shelf Weekender', '1307', 'Blue', 5, 16),
-    ('24" 3-Shelf Weekender', '20185', 'Blue', 5, 17), 
-    ('Low Profile TMD', '2563', 'Blue', 4, 15),
-    ('5-Shelf TMD', '14211', 'Blue', 2, 20),
+    ('18" 4-Shelf Weekender', '20226', 'Blue', 5, 25, 1),
+    ('28" 4-Shelf Weekender', '1307', 'Blue', 5, 16, 1),
+    ('24" 3-Shelf Weekender', '20185', 'Blue', 5, 17, 1), 
+    ('Low Profile TMD', '2563', 'Blue', 4, 15, 2),
+    ('5-Shelf TMD', '14211', 'Blue', 2, 20, 2),
     -- Equipment
-    ('36" FEM', '1706902', 'Black', 1, NULL),
-    ('48" ADA FEM', '2088202', 'Black', 1, NULL),
-    ('37" ADA FEM', '2075502', 'Black', 1, NULL),
-    ('Spinners', '1954702', 'Black', 1, NULL),
-    ('Cookie Countertop', '2026902', 'Black', 1, NULL),
+    ('36" FEM', '1706902', 'Black', 1, NULL, 3),
+    ('48" ADA FEM', '2088202', 'Black', 1, NULL, 3),
+    ('37" ADA FEM', '2075502', 'Black', 1, NULL, 3),
+    ('Spinners', '1954702', 'Black', 1, NULL, NULL),
+    ('Cookie Countertop', '2026902', 'Black', 1, NULL, NULL),
     -- POS *ProductNumbers aren't real*
-    ('Stripping', 'RED203', 'Red', 20, NULL),
-    ('Stripping', 'BLUE202', 'Blue', 20, NULL),
-    ('Extrusions', 'EX222', NULL, 10, NULL);
+    ('Stripping', 'RED203', 'Red', 20, NULL, NULL),
+    ('Stripping', 'BLUE202', 'Blue', 20, NULL, NULL),
+    ('Extrusions', 'EX222', NULL, 10, NULL, NULL);
 
 -- ProductInventories
 INSERT INTO ProductInventories (InventoryDate, Quantity, 
