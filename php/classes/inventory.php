@@ -181,8 +181,8 @@ class Inventory
         $sql = "
           SELECT p.ProductName, p.ProductNumber, p.Color, p.NumberPerCase, 
 	        p.TypeId, i.InventoryDate, i.Quantity
-          FROM Product p
-          INNER JOIN ProductInventory i
+          FROM Products p
+          INNER JOIN ProductInventories i
           ON p.ProductId=i.ProductId
           WHERE i.InventoryDate = :iDate
           AND p.TypeId = :pType;
@@ -195,5 +195,24 @@ class Inventory
         $stmt->execute();
 
         return $stmt->fetchAll();
+    }
+    
+    public static function readInventoryByLocation(&$pdo, $inventoryLocationId, 
+                                                    $locationId)
+    {
+        $sql = "
+            SELECT p.ProductName, p.ProductNumber, p.Color, p.NumberPerCase,
+                i.InventoryDate, i.Quantity
+            FROM ProductInventories i
+            INNER JOIN Products p
+            ON i.ProductId = p.ProductId
+            INNER JOIN InventoryLocations il
+            ON i.InventoryLocationId = il.InventoryLocationId
+            WHERE il.LocationId = :locationId
+            AND il.InventoryLocationId = :inventoryLocationId;
+        ";
+                
+                
+                
     }
 }
