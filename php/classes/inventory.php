@@ -212,7 +212,13 @@ class Inventory
             AND il.InventoryLocationId = :inventoryLocationId;
         ";
                 
-                
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->bindParam(":locationId", $locationId, PDO::PARAM_INT);
+        $stmt->bindParam(":inventoryLocationId", $inventoryLocationId, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        return $stmt->fetchAll();
                 
     }
 }
