@@ -197,25 +197,26 @@ class Inventory
         return $stmt->fetchAll();
     }
     
-    public static function readInventoryByLocation(&$pdo, $inventoryLocationId, 
-                                                    $locationId)
+    public static function readInventoryByLocation(&$pdo, $locationId)
     {
-        $sql = "
+      $sql = "
             SELECT p.ProductName, p.ProductNumber, p.Color, p.NumberPerCase,
-                i.InventoryDate, i.Quantity
-            FROM ProductInventories i
-            INNER JOIN Products p
+                i.InventoryDate, i.Quantity, i.InventoryLocationId
+            FROM Products p
+            INNER JOIN ProductInventories i
             ON i.ProductId = p.ProductId
             INNER JOIN InventoryLocations il
             ON i.InventoryLocationId = il.InventoryLocationId
             WHERE il.LocationId = :locationId
-            AND il.InventoryLocationId = :inventoryLocationId;
+            ORDER BY i.InventoryLocationId;
         ";
-                
+     
+        
+        // Prepare statment and bind parameters
         $stmt = $pdo->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_OBJ);
         $stmt->bindParam(":locationId", $locationId, PDO::PARAM_INT);
-        $stmt->bindParam(":inventoryLocationId", $inventoryLocationId, PDO::PARAM_INT);
+        //$stmt->bindParam(":inventoryLocationId", $inventoryLocationId, PDO::PARAM_INT);
         $stmt->execute();
         
         return $stmt->fetchAll();
