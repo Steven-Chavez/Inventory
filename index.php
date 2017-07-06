@@ -8,7 +8,6 @@
      */
     require_once("../../database.php");
     require_once("php/classes/inventory.php");
-    require_once("php/classes/product-type.php");
 
 
     // connect to database and obtain PDO object
@@ -16,25 +15,17 @@
     $pdo = $pdo->getPDO();
 
     session_start();
-
-    //handle product type to display appropriate product type
-    if(!isset($_SESSION["productType"]))
-    {
-        //set default product type
-        $_SESSION["productType"] = 1;
-    }
     
-    if(!isset($_SESSION["inventoryDateIndex"]))
+    if(!isset($_SESSION["locationId"]))
     {
         //set default inventory date index
-        $_SESSION["inventoryDateIndex"] = 0;
+        $_SESSION["locationId"] = 1;
     }
     
-    $dateIndex = $_SESSION["inventoryDateIndex"];
     
-    $dates = Inventory::readInventoryDates($pdo);
-    $types = ProductType::readType($pdo);
-    $joinByType = Inventory::readInventoryProductJOIN($pdo, $_SESSION["productType"], $dates[$dateIndex]->InventoryDate);
+    //$dates = Inventory::readInventoryDates($pdo);
+    //$types = ProductType::readType($pdo);
+    $joinByType = Inventory::readInventoryByLocation($pdo, $_SESSION["locationId"]);
     
     // format current date for better presentation
     $dateStr = $joinByType[0]->InventoryDate;
@@ -85,27 +76,42 @@
                     Most Current Cardboard Inventory: 
                     <?php echo $CardboardInvCurrentDate; ?> 
                 </h4>
-                <table class="table table-bordered">
-                    <tr>
-                        <th>Product Name</th>
-                        <th>EQI</th>
-                        <th>Color</th>
-                        <th>Qty</th>
-                        <th>Location</th>
-                    </tr>
+                
                     <?php
-                        foreach($joinByType as $table)
+                    
+                    $total = count($joinByType);
+                    $index = 1;
+                    $header = false;
+                    
+                    for($i = 0; $i < $total; $i++)
+                    {
+                        if($joinByType[$i]->InventoryLocationId == $index && $header == false)
                         {
-                            echo "
+                            echo '  <table class="table table-bordered">
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>EQI</th>
+                                        <th>Color</th>
+                                        <th>Qty</th>
+                                    </tr>';
+                            $header = true;
+                        }
+                        else if($joinByType[$i]->InventoryLocationId != $index)
+                        {
+                            $header = false;
+                            $index++;
+                        }
+                        
+                        echo "
                                 <tr>
-                                    <td>{$table->ProductName}</td>
-                                    <td>{$table->ProductNumber}</td>
-                                    <td>{$table->Color}</td>
-                                    <td>{$table->Quantity}</tb>
-                                    <td>{$table->LocalLocation}</td>
+                                    <td>{$joinByType[$i]->ProductName}</td>
+                                    <td>{$joinByType[$i]->ProductNumber}</td>
+                                    <td>{$joinByType[$i]->Color}</td>
+                                    <td>{$joinByType[$i]->Quantity}</tb>
                                 </tr> 
                             ";
-                        }
+                            
+                    }
                         session_unset();
                         session_destroy();
                     ?>
