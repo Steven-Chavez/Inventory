@@ -130,11 +130,12 @@ class InventoryLocation
     {
        // SQL statement that gets all InventoryLocation names of a location.
         $sql = "
-          SELECT il.LocationName
+          SELECT il.InventoryLocationId Id, il.LocationName Name
           FROM InventoryLocations il
           INNER JOIN Locations l
           ON il.LocationId=l.LocationId
-          WHERE l.LocationId = :locationId;
+          WHERE l.LocationId = :locationId
+          ORDER BY il.InventoryLocationId;
         ";
        
         // Prepare SQL statment and bind parameters.
@@ -144,7 +145,5 @@ class InventoryLocation
         $stmt->execute();
         
         return $stmt->fetchAll();
-       
-       
     }
 }
