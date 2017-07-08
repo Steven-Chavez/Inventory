@@ -126,4 +126,16 @@ class InventoryLocation
     //  DB CRUD METHODS
     //###################################
     
+    public static function readInventoryLocationBylocation(&$pdo, $locationId)
+    {
+       $sql = "
+         SELECT il.LocationName
+         FROM InventoryLocations il
+         INNER JOIN Locations l
+         ON il.LocationId=l.LocationId
+         WHERE l.LocationId = :locationId;
+       ";
+       
+       
+    }
 }
