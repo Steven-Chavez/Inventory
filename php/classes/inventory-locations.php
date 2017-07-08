@@ -128,13 +128,22 @@ class InventoryLocation
     
     public static function readInventoryLocationBylocation(&$pdo, $locationId)
     {
-       $sql = "
-         SELECT il.LocationName
-         FROM InventoryLocations il
-         INNER JOIN Locations l
-         ON il.LocationId=l.LocationId
-         WHERE l.LocationId = :locationId;
-       ";
+       // SQL statement that gets all InventoryLocation names of a location.
+        $sql = "
+          SELECT il.LocationName
+          FROM InventoryLocations il
+          INNER JOIN Locations l
+          ON il.LocationId=l.LocationId
+          WHERE l.LocationId = :locationId;
+        ";
+       
+        // Prepare SQL statment and bind parameters.
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->bindParam(":locationId", $locationId, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        return $stmt->fetchAll();
        
        
     }
