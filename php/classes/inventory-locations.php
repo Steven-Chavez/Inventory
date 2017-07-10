@@ -126,7 +126,8 @@ class InventoryLocation
     //  DB CRUD METHODS
     //###################################
     
-    public static function readInventoryLocationBylocation(&$pdo, $locationId)
+    public static function readInventoryLocationBylocation
+                           (&$pdo, $locationId)
     {
        // SQL statement that gets all InventoryLocation names of a location.
         $sql = "
