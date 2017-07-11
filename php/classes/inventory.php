@@ -219,7 +219,33 @@ class Inventory
         //$stmt->bindParam(":inventoryLocationId", $inventoryLocationId, PDO::PARAM_INT);
         $stmt->execute();
         
-        return $stmt->fetchAll();
-                
+        return $stmt->fetchAll();     
     }
+    
+    public static function readMaxDatesForEachInventoryLocation
+            (&$pdo, $inventoryLocationIds)
+    {
+        $maxDates[] = 0;
+        $index = 0;
+        foreach($inventoryLocationIds as $value)
+        {
+            $sql = "
+                SELECT max(InventoryDate)
+                FROM ProductInventories i
+                WHERE InventoryLocationId = :id;
+            ";
+            
+            // Prepare statment and bind parameters
+            $stmt = $pdo->prepare($sql);
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->bindParam(":id", $value, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            $maxDates[$index] = $stmt->fetchAll();  
+            $index++;
+        }
+        
+        return $maxDates;
+    }
+    
 }
