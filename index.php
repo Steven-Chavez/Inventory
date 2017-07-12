@@ -13,6 +13,9 @@
     $pdo = new DatabaseConnect();
     $pdo = $pdo->getPDO();
     
+    session_unset();
+    session_destroy();
+    
     // Get list of locations to choose from.
     $location = Location::readLocationCityAndState($pdo);
 ?>
