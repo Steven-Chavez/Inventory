@@ -191,7 +191,7 @@ class Location
     //###################################
     public static function readLocationCityAndState(&$pdo)
     {
-        $sql = "SELECT LocationId, City, LocationState FROM Location ORDER BY City";
+        $sql = "SELECT LocationId, City, LocationState FROM Locations ORDER BY City";
 
         $results = $pdo->query($sql);
 
