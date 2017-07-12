@@ -197,6 +197,25 @@ class Inventory
         return $stmt->fetchAll();
     }
     
+    public static function readInventoryByLocationAndDateSort(&$pdo, $locationId)
+    {
+        var_dump($locationId);
+        $sql = " 
+            SELECT i.InventoryDate, p.ProductName, p.ProductNumber, i.Quantity
+            FROM ProductInventories i
+            INNER JOIN Products p
+            ON i.ProductId=p.ProductId
+            WHERE InventoryLocationId = :id;
+            ";
+        
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->bindParam(":id", $locationId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+    
     public static function readInventoryByLocation(&$pdo, $locationId)
     {
       $sql = "
@@ -237,7 +256,7 @@ class Inventory
             
             // Prepare statment and bind parameters
             $stmt = $pdo->prepare($sql);
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->setFetchMode(PDO::FETCH_OBJ);
             $stmt->bindParam(":id", $value, PDO::PARAM_INT);
             $stmt->execute();
             
