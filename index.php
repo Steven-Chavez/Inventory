@@ -66,18 +66,18 @@
         <main class="col-md-6 col-md-offset-3">
             <form  action="php/form-processor/select-inventory-location-processor.php" method="post">
                 <h3>Select Location:</h3> <br>
-            <select class="form-control" name="locationId">
-                <?php
-                //Populate drop down box with values from db
-                foreach ($location as $value)
-                {
-                    echo"<option value=\"{$value->LocationId}\">{$value->City}, 
-                            {$value->LocationState}</option>";
-                }
-                ?>
-            </select><br>
-            <input type="submit" value="Submit">
-        </form>
+                <select class="form-control" name="locationId">
+                    <?php
+                    //Populate drop down box with values from db
+                    foreach ($location as $value)
+                    {
+                        echo"<option value=\"{$value->LocationId}\">{$value->City}, 
+                                {$value->LocationState}</option>";
+                    }
+                    ?>
+                </select><br>
+                <input type="submit" value="Submit">
+            </form>
         </main>
     </div>
 </body>
