@@ -203,4 +203,22 @@ class Location
 
         return $data;
     }
+    
+    public static function readCityStateById(&$pdo, $locationId)
+    {
+        // SQL statement gets name of city and state by id
+        $sql = "
+            SELECT City, LocationState
+            FROM Locations
+            WHERE LocationId = :id;
+        ";
+        
+        // Prepare SQL statment and bind parameters.
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->bindParam(":id", $locationId, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        return $stmt->fetchAll();
+    }
 }
