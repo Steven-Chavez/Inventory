@@ -199,13 +199,15 @@ class Inventory
     
     public static function readInventoryByLocationAndDateSort(&$pdo, $locationId)
     {
-        var_dump($locationId);
         $sql = " 
-            SELECT i.InventoryDate, p.ProductName, p.ProductNumber, i.Quantity
+            SELECT 
+                i.InventoryDate Date, p.ProductName, p.ProductNumber, 
+                p.Color, i.Quantity
             FROM ProductInventories i
             INNER JOIN Products p
             ON i.ProductId=p.ProductId
-            WHERE InventoryLocationId = :id;
+            WHERE InventoryLocationId = :id
+            ORDER BY i.InventoryDate;
             ";
         
         $stmt = $pdo->prepare($sql);
@@ -229,42 +231,13 @@ class Inventory
             WHERE il.LocationId = :locationId
             ORDER BY i.InventoryLocationId;
         ";
-     
-        
+      
         // Prepare statment and bind parameters
         $stmt = $pdo->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_OBJ);
         $stmt->bindParam(":locationId", $locationId, PDO::PARAM_INT);
-        //$stmt->bindParam(":inventoryLocationId", $inventoryLocationId, PDO::PARAM_INT);
         $stmt->execute();
         
         return $stmt->fetchAll();     
     }
-    
-    public static function readMaxDatesForEachInventoryLocation
-            (&$pdo, $inventoryLocationIds)
-    {
-        $maxDates[] = 0;
-        $index = 0;
-        foreach($inventoryLocationIds as $value)
-        {
-            $sql = "
-                SELECT max(InventoryDate)
-                FROM ProductInventories i
-                WHERE InventoryLocationId = :id;
-            ";
-            
-            // Prepare statment and bind parameters
-            $stmt = $pdo->prepare($sql);
-            $stmt->setFetchMode(PDO::FETCH_OBJ);
-            $stmt->bindParam(":id", $value, PDO::PARAM_INT);
-            $stmt->execute();
-            
-            $maxDates[$index] = $stmt->fetchAll();  
-            $index++;
-        }
-        
-        return $maxDates;
-    }
-    
 }
