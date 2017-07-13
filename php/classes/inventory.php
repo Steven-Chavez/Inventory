@@ -202,7 +202,7 @@ class Inventory
         $sql = " 
             SELECT 
                 i.InventoryDate Date, p.ProductName, p.ProductNumber, 
-                p.Color, i.Quantity
+                p.Color, i.Quantity, i.InventoryId
             FROM ProductInventories i
             INNER JOIN Products p
             ON i.ProductId=p.ProductId
@@ -222,7 +222,7 @@ class Inventory
     {
       $sql = "
             SELECT p.ProductName, p.ProductNumber, p.Color, p.NumberPerCase,
-                i.InventoryDate, i.Quantity, i.InventoryLocationId
+                i.InventoryDate, i.Quantity, i.InventoryLocationId, p.InventoryId
             FROM Products p
             INNER JOIN ProductInventories i
             ON i.ProductId = p.ProductId
