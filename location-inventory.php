@@ -22,17 +22,19 @@
     
     // Obtain all inventory locations at choosen location.
     $inventoryLocations = InventoryLocation::readInventoryLocationBylocation($pdo, $locationId);
+    echo "<p>Inventory Locations</p>";
     
     // Handle inventory location id session 
     if(!isset($_SESSION["iLocationId"]))
     {
         //set default location
-        $_SESSION["iLocationId"] = ($inventoryLocations[0]->Id)-1;
+        $_SESSION["iLocationId"] = 0;
     }
     
     $iLocationId = $_SESSION["iLocationId"];
+    echo "<p>iLocationId</p>";
     
-    $inventory = Inventory::readInventoryByLocationAndDateSort($pdo, $iLocationId);
+    $inventory = Inventory::readInventoryByLocationAndDateSort($pdo, $iLocationId+1);
    
     $locationName = Location::readCityStateById($pdo, $locationId);    
     
@@ -68,7 +70,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">E-C Inventory</a>
+                <a class="navbar-brand" href="index.php">E-C Inventory</a>
             </div>
         </div><!-- /.container-fluid -->
     </nav>
@@ -76,7 +78,7 @@
         <div style="padding-left: 2em" class="col-lg-4 col-lg-offset-4 col-md-8">
             <?php 
                 echo "<h1>{$locationName[0]->City}, {$locationName[0]->LocationState}</h1>";
-                echo "<h4>Inventory Location: {$inventoryLocations[$iLocationId-1]->Name}</h4>"
+                echo "<h4>Inventory Location: {$inventoryLocations[$iLocationId]->Name}</h4>"
             ?>
         </div>
     </div>
@@ -87,9 +89,11 @@
                 Select Inventory Location:
                 <select class="form-control" name="iLocationId">
                     <?php
+                        $index = 0;
                         foreach($inventoryLocations as $value)
                         {
-                            echo "<option value=\"{$value->Id}\">{$value->Name}</option>";
+                            echo "<option value=\"{$index}\">{$value->Name}</option>";
+                            $index++;
                         }
                     ?>
                 </select>
@@ -104,8 +108,11 @@
                         $date = $inventory[0]->Date;
                         $header = false;
                         
+                        $total = count($inventory);
+                        
                         foreach($inventory as $table)
                         {
+                            echo "<br>";
                             if($date == $table->Date && $header == false)
                             {
                                 echo "<h3>{$table->Date}</h3>";
@@ -118,12 +125,6 @@
                                         <th>Qty</th>
                                     </tr>
                                 ';
-                                $header = true;
-                            }
-                            else if($date != $table->Date) 
-                            {
-                                $header = false;
-                                $date = $table->Date;
                                 
                                 echo "
                                     <tr>
@@ -132,8 +133,13 @@
                                         <td>{$table->Color}</td>
                                         <td>{$table->Quantity}</tb>
                                     </tr> 
-                                    </table>
                                 ";
+                                $header = true;
+                            }
+                            else if($date != $table->Date) 
+                            {
+                                $header = false;
+                                $date = $table->Date;
                             }
                             else
                             {
