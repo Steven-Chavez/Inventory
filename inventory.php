@@ -69,7 +69,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">E-C Inventory</a>
+                <a class="navbar-brand" href="index.php">E-C Inventory</a>
             </div>
         </div><!-- /.container-fluid -->
     </nav>
