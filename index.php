@@ -13,6 +13,7 @@
     $pdo = new DatabaseConnect();
     $pdo = $pdo->getPDO();
     
+    session_start();
     session_unset();
     session_destroy();
     
