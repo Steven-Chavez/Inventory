@@ -207,7 +207,7 @@ class Inventory
             INNER JOIN Products p
             ON i.ProductId=p.ProductId
             WHERE InventoryLocationId = :id
-            ORDER BY i.InventoryDate, i.ProductId;
+            ORDER BY i.InventoryDate DESC, i.ProductId;
             ";
         
         $stmt = $pdo->prepare($sql);
