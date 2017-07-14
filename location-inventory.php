@@ -76,7 +76,8 @@
         <div style="padding-left: 2em" class="col-lg-4 col-lg-offset-4 col-md-8">
             <?php 
                 echo "<h1>{$locationName[0]->City}, {$locationName[0]->LocationState}</h1>";
-                echo '<h3>Inventory Location: <span style="color: #990000">' . $inventoryLocations[$iLocationId]->Name . '</span></h3>';
+                echo '<h3>Location: <span style="color: #990000">' . 
+                        $inventoryLocations[$iLocationId]->Name . '</span></h3><br>';
             ?>
         </div>
     </div>
@@ -97,6 +98,7 @@
                 </select>
                 <br>
                 <input type="submit" value="Submit">
+                <br>
                 <br>
             </form>
         </aside>
