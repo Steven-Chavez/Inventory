@@ -201,13 +201,13 @@ class Inventory
     {
         $sql = " 
             SELECT 
-                i.InventoryDate Date, p.ProductName, p.ProductNumber, 
-                p.Color, i.Quantity, i.InventoryId
+                i.InventoryDate Date, p.ProductName Name, p.ProductNumber Number, 
+                p.Color, i.Quantity, i.InventoryId Id
             FROM ProductInventories i
             INNER JOIN Products p
             ON i.ProductId=p.ProductId
             WHERE InventoryLocationId = :id
-            ORDER BY i.InventoryDate;
+            ORDER BY i.InventoryDate, i.ProductId;
             ";
         
         $stmt = $pdo->prepare($sql);
