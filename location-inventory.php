@@ -22,7 +22,6 @@
     
     // Obtain all inventory locations at choosen location.
     $inventoryLocations = InventoryLocation::readInventoryLocationBylocation($pdo, $locationId);
-    echo "<p>Inventory Locations</p>";
     
     // Handle inventory location id session 
     if(!isset($_SESSION["iLocationId"]))
@@ -32,7 +31,6 @@
     }
     
     $iLocationId = $_SESSION["iLocationId"];
-    echo "<p>iLocationId</p>";
     
     $inventory = Inventory::readInventoryByLocationAndDateSort($pdo, $iLocationId+1);
    
@@ -78,7 +76,7 @@
         <div style="padding-left: 2em" class="col-lg-4 col-lg-offset-4 col-md-8">
             <?php 
                 echo "<h1>{$locationName[0]->City}, {$locationName[0]->LocationState}</h1>";
-                echo "<h4>Inventory Location: {$inventoryLocations[$iLocationId]->Name}</h4>"
+                echo '<h3>Inventory Location: <span style="color: #990000">' . $inventoryLocations[$iLocationId]->Name . '</span></h3>';
             ?>
         </div>
     </div>
@@ -105,52 +103,56 @@
         <main style="padding-left: 2em" class="col-md-8">
             <div class="table-responsive">
                     <?php
-                        $date = $inventory[0]->Date;
-                        $header = false;
-                        
                         $total = count($inventory);
+                        $date = $inventory[0]->Date;
+                        $differentDate = true;
                         
-                        foreach($inventory as $table)
+                        for($i = 0; $i < $total; $i++)
                         {
-                            echo "<br>";
-                            if($date == $table->Date && $header == false)
+                            //Start table header 
+                            if($date == $inventory[$i]->Date)
                             {
-                                echo "<h3>{$table->Date}</h3>";
-                                echo '  
-                                    <table class="table table-bordered">
-                                    <tr>
-                                        <th>Product Name</th>
-                                        <th>EQI</th>
-                                        <th>Color</th>
-                                        <th>Qty</th>
-                                    </tr>
-                                ';
+                                // If Date is different display table header.
+                                if($differentDate == true)
+                                {
+                                    // Start table header and display inventory date.
+                                    echo '  
+                                        <table class="table table-bordered">
+                                        <h4>'. $inventory[$i]->Date. '</h4>
+                                        <tr>
+                                            <th>Product Name</th>
+                                            <th>EQI</th>
+                                            <th>Color</th>
+                                            <th>Qty</th>
+                                        </tr>
+                                    ';
+                                    
+                                    // Date is no longer different.
+                                    $differentDate = false;
+                                }
                                 
+                                // Display row of table data.
                                 echo "
                                     <tr>
-                                        <td>{$table->ProductName}</td>
-                                        <td>{$table->ProductNumber}</td>
-                                        <td>{$table->Color}</td>
-                                        <td>{$table->Quantity}</tb>
+                                        <td>{$inventory[$i]->Quantity}</tb>
+                                        <td>{$inventory[$i]->Name}</td>
+                                        <td>{$inventory[$i]->Number}</td>
+                                        <td>{$inventory[$i]->Color}</td>
                                     </tr> 
                                 ";
-                                $header = true;
+                                
+                                // Before loop ends close table.
+                                if($i == $total-1)
+                                {
+                                    echo "</table><br>";
+                                }
                             }
-                            else if($date != $table->Date) 
+                            // If date is different reset values to display new table.
+                            else if($date != $inventory[$i]->Date)
                             {
-                                $header = false;
-                                $date = $table->Date;
-                            }
-                            else
-                            {
-                                echo "
-                                    <tr>
-                                        <td>{$table->ProductName}</td>
-                                        <td>{$table->ProductNumber}</td>
-                                        <td>{$table->Color}</td>
-                                        <td>{$table->Quantity}</tb>
-                                    </tr> 
-                                ";
+                                $differentDate = true;
+                                $date = $inventory[$i]->Date;
+                                $i--;
                             }
                         }
                     ?>
