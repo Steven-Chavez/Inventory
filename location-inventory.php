@@ -117,10 +117,13 @@
                                 // If Date is different display table header.
                                 if($differentDate == true)
                                 {
+                                    // format current date for better presentation
+                                    $formattedDate = date("F j, Y", strtotime($date));
+                                    
                                     // Start table header and display inventory date.
                                     echo '  
                                         <table class="table table-bordered">
-                                        <h4>'. $inventory[$i]->Date. '</h4>
+                                        <h4>'. $formattedDate . '</h4>
                                         <tr>
                                             <th>Product Name</th>
                                             <th>EQI</th>
