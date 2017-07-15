@@ -55,7 +55,7 @@
             </div>
         </div><!-- /.container-fluid -->
     </nav>
-    <div class="row">
+    <div style="padding-left: 2em; padding-right: 2em" class="row">
         <header class="col-md-6 col-md-offset-3">
             <h1>Welcome To E-C Inventory!</h1>
             <p>
@@ -66,7 +66,7 @@
             </p>
         </header>
     </div>
-    <div class="row">
+    <div style="padding-left: 2em; padding-right: 2em"class="row">
         <main class="col-md-6 col-md-offset-3">
             <form  action="php/form-processor/select-inventory-location-processor.php" method="post">
                 <h3>Select Location:</h3> <br>
