@@ -123,7 +123,7 @@
                                     // Start table header and display inventory date.
                                     echo '  
                                         <table class="table table-bordered">
-                                        <h4>'. $formattedDate . '</h4>
+                                        <h4>'. $formattedDate . ' Inventory</h4>
                                         <tr>
                                             <th>Product Name</th>
                                             <th>EQI</th>
