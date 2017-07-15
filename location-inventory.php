@@ -125,10 +125,10 @@
                                         <table class="table table-bordered">
                                         <h4>'. $formattedDate . ' Inventory</h4>
                                         <tr>
+                                            <th>Quantity</th>
                                             <th>Product Name</th>
-                                            <th>EQI</th>
+                                            <th>EQI #</th>
                                             <th>Color</th>
-                                            <th>Qty</th>
                                         </tr>
                                     ';
                                     
