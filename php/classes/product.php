@@ -252,5 +252,10 @@ class Product
 
         return $stmt->fetchAll();
     }
+    
+    public static function readSearchProduct()
+    {
+        
+    }
 }
 ?>
