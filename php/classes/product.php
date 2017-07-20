@@ -253,7 +253,11 @@ class Product
         return $stmt->fetchAll();
     }
     
-    public static function readSearchProduct()
+    /**
+     * Searches for product by name.
+     * @param PDO $pdo
+     * @param string $search
+     */
     {
         
     }
