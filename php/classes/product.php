@@ -215,8 +215,14 @@ class Product
     //###################################
     //  DB CRUD METHODS
     //###################################
+    
+    /**
+     * Inserts new product data into DB
+     * @param PDO $pdo
+     */
     public function insert(&$pdo)
     {
+        // SQL statement for inserting new product.
         $sql = "
             INSERT INTO Products(ProductName, ProductNumber,
                               Color, NumberPerCase, NumberPerPallet, 
@@ -224,6 +230,7 @@ class Product
             VALUES(:pName, :pNumber, :color, :percase, :perpallet, 
                    :categoryId, :imgId)";
 
+        // Prepare statement and bind parameters.
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':pName', $this->productName, PDO::PARAM_STR);
         $stmt->bindParam(':pNumber', $this->productNumber, PDO::PARAM_STR);
@@ -235,9 +242,15 @@ class Product
         $stmt->execute();
     }
 
+    /**
+     * Reads products by category Id
+     * @param PDO $pdo
+     * @param int $categoryId
+     * @return OBJ
+     */
     public static function readProductsByCategoryId(&$pdo, $categoryId)
     {
-
+         // SQL statement that searches for product by category Id.
         $sql = "
           SELECT ProductId, ProductName, ProductNumber, Color,
             NumberPerCase, CategoryId
@@ -245,11 +258,13 @@ class Product
           WHERE CategoryId=:categoryId
         ";
 
+        // Prepare statement and bind parameters.
         $stmt = $pdo->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_OBJ);
         $stmt->bindParam(':categoryId', $categoryId, PDO::PARAM_INT);
         $stmt->execute();
 
+        // Return data.
         return $stmt->fetchAll();
     }
     
@@ -257,22 +272,24 @@ class Product
      * Searches for product by name.
      * @param PDO $pdo
      * @param string $search
+     * @return OBJ
      */
     public static function searchProduct(&$pdo, $search)
     {
-        // SQL statement that searches for product name like search input
+        // SQL statement that searches for product name like search input.
         $sql = "
             SELECT ProductId ProductName
             FROM Products
             WHERE ProductName LIKE '%:search%';
         ";
         
-        //Prepare statement and bind parameters
+        // Prepare statement and bind parameters.
         $stmt = $pdo->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_OBJ);
         $stmt->bindParam(':search', $search, PDO::PARAM_INT);
         $stmt->execute();
 
+        // Return data.
         return $stmt->fetchAll();
     }
 }
