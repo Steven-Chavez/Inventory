@@ -266,6 +266,13 @@ class Product
             FROM Products
             WHERE ProductName LIKE '%:search%';
         ";
+        
+        //Prepare statement and bind parameters
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->bindParam(':search', $search, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
     }
 }
-?>
