@@ -278,15 +278,17 @@ class Product
     {
         // SQL statement that searches for product name like search input.
         $sql = "
-            SELECT ProductId ProductName
+            SELECT ProductId, ProductName
             FROM Products
-            WHERE ProductName LIKE '%:search%';
+            WHERE ProductName LIKE :search;
         ";
         
         // Prepare statement and bind parameters.
         $stmt = $pdo->prepare($sql);
+        //Prepare search variable LIKE condition
+        $search = "%$search%";
         $stmt->setFetchMode(PDO::FETCH_OBJ);
-        $stmt->bindParam(':search', $search, PDO::PARAM_INT);
+        $stmt->bindParam(':search', $search, PDO::PARAM_STR);
         $stmt->execute();
 
         // Return data.
