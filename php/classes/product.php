@@ -260,7 +260,12 @@ class Product
      */
     public static function searchProduct(&$pdo, $search)
     {
-        
+        // SQL statement that searches for product name like search input
+        $sql = "
+            SELECT ProductId ProductName
+            FROM Products
+            WHERE ProductName LIKE '%:search%';
+        ";
     }
 }
 ?>
