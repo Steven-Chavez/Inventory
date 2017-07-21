@@ -258,6 +258,7 @@ class Product
      * @param PDO $pdo
      * @param string $search
      */
+    public static function searchProduct(&$pdo, $search)
     {
         
     }
