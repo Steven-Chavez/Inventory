@@ -9,6 +9,10 @@
  * Time: 4:19AM
  * Version: 1.0
  */
+session_start();
+
+$search = $_SESSION['$search'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
