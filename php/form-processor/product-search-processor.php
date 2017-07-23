@@ -12,6 +12,9 @@
 require_once("../../../../database.php");
 require_once("../classes/product.php");
 
+// Start session
+session_start();
+
 // Connect to DB and get PDO object.
 $pdo = new DatabaseConnect();
 $pdo = $pdo->getPDO();
@@ -22,4 +25,8 @@ $search = $_POST['search'];
 // Search for product and get results.
 $results = Product::searchProduct($pdo, $search);
 
-var_dump($results);
+// Place $results into session
+$_SESSION['$search'] = $results;
+
+// Go to select-search-product.php 
+header("Location: ../../select-search-product.php");
