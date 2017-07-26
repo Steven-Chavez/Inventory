@@ -9,11 +9,11 @@
  * Time: 4:19AM
  * Version: 1.0
  */
-session_start();
+    session_start();
 
-$search = $_SESSION['$search'];
+    $search = $_SESSION['$search'];
 
-var_dump($search);
+    var_dump($search);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +58,6 @@ var_dump($search);
             </p>
             <?php
                 echo '<form action="php/form-processor/select-one-product-processor.php" method="post">';
-                
                     foreach($search as $value)
                     {
                         echo '<input type="radio" name="id" value="' . 
@@ -67,7 +66,6 @@ var_dump($search);
                              $value->ProductName . 
                              '<br>';
                     }
-                
                 echo '<input type="submit" value="Submit">
                 </form>';
             ?>
