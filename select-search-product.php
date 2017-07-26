@@ -13,6 +13,7 @@ session_start();
 
 $search = $_SESSION['$search'];
 
+var_dump($search);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,6 +56,21 @@ $search = $_SESSION['$search'];
             <p>
                 Please select the exact product you are looking for. 
             </p>
+            <?php
+                echo '<form action="php/form-processor/select-one-product-processor.php" method="post">';
+                
+                    foreach($search as $value)
+                    {
+                        echo '<input type="radio" name="id" value="' . 
+                             $value->ProductId . 
+                             '"> '.
+                             $value->ProductName . 
+                             '<br>';
+                    }
+                
+                echo '<input type="submit" value="Submit">
+                </form>';
+            ?>
         </header>
     </div>        
 </body>
