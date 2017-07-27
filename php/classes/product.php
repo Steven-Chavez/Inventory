@@ -295,14 +295,5 @@ class Product
         return $stmt->fetchAll();
     }
     
-    /**
-     * Reads all locations who has the product in it's inventory.  
-     * @param PDO $pdo
-     * @param int $id
-     * @return OBJ
-     */
-    public static function readLocationsWithProduct(&$pdo, $id)
-    {
-        return $stmt->fetchAll();
-    }
+    
 }
