@@ -294,6 +294,4 @@ class Product
         // Return data.
         return $stmt->fetchAll();
     }
-    
-    
 }

@@ -232,7 +232,12 @@ class Location
     {
         // SQL statement that searches for all locations by product id
         $stmt = " 
-            SE
+            SELECT *
+            FROM Locations l
+            JOIN InventoryLocations il
+            ON l.LocationId=il.LocationId
+            JOIN ProductInventories i
+            ON i.InventoryLocationId=il.InventoryLocationId;
         ";
         
         return $stmt->fetchAll();
