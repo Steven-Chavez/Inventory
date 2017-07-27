@@ -294,4 +294,12 @@ class Product
         // Return data.
         return $stmt->fetchAll();
     }
+    
+    /**
+     * Reads all locations who has the product in it's inventory.  
+     */
+    public static function readLocationsWithProduct(&$pdo, $id)
+    {
+        return $stmt->fetchAll();
+    }
 }
