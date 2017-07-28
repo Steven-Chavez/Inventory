@@ -49,12 +49,16 @@
         </div><!-- /.container-fluid -->
     </nav>
     <div style="padding-left: 2em; padding-right: 2em" class="row">
-        <header class="col-md-6 col-md-offset-3">
-            <h1>There are multiple search results!</h1>
-            <p>
-                Please select the exact product you are looking for. 
-            </p>
-            <?php
+        <header class="col-md-6 col-md-offset-3"> 
+        <?php
+            $total = count($search);
+            if($search > 1 && !isset($_SESSION['id']))
+            {
+                echo '<h1>There are multiple search results!</h1>
+                  <p>
+                    Please select the exact product you are looking for. 
+                  </p>';
+
                 echo '<form action="php/form-processor/select-one-product-processor.php" method="post">';
                     foreach($search as $value)
                     {
@@ -66,13 +70,14 @@
                     }
                 echo '<input type="submit" value="Submit">
                 </form>';
-            ?>
+            }
+        ?>
         </header>
         <!--Display HTML results of product search if session id is set-->
         <?php
             if(isset($_SESSION['id']))
             {
-                echo "<h3>id isset!</h3>";
+                
             }
         ?>
     </div>        
