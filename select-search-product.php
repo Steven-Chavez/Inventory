@@ -12,8 +12,6 @@
     session_start();
 
     $search = $_SESSION['$search'];
-
-    var_dump($search);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,6 +68,13 @@
                 </form>';
             ?>
         </header>
+        <!--Display HTML results of product search if session id is set-->
+        <?php
+            if(isset($_SESSION['id']))
+            {
+                echo "<h3>id isset!</h3>";
+            }
+        ?>
     </div>        
 </body>
 </html>
