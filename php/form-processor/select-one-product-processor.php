@@ -15,3 +15,6 @@ $id = is_int($_POST['id']);
 
 // Populate session with post data.
 $_SESSION['id'] = $id;
+
+// Redirect to select-search-product.php
+header("Location: ../../select-search-product.php");
