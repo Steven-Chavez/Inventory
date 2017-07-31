@@ -231,19 +231,24 @@ class Location
     public static function readLocationsWithProduct(&$pdo, $id)
     {
         // SQL statement that searches for all locations by product id
-        $stmt = " 
-            SELECT *
+        $sql = " 
+            SELECT l.City, l.LocationState State, p.ProductName Name, 
+                i.Quantity, i.InventoryDate Date
             FROM Locations l
             JOIN InventoryLocations il
             ON l.LocationId=il.LocationId
             JOIN ProductInventories i
-            ON i.InventoryLocationId=il.InventoryLocationId;
+            ON i.InventoryLocationId=il.InventoryLocationId
+            JOIN Products p
+            ON i.ProductId=p.ProductId
+            WHERE p.ProductId=:id
+            ORDER BY l.LocationState, l.City, i.InventoryDate DESC;
         ";
         
         // Prepare SQL statment and bind parameters.
         $stmt = $pdo->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_OBJ);
-        $stmt->bindParam(":id", $locationId, PDO::PARAM_INT);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
         
         return $stmt->fetchAll();
