@@ -240,6 +240,12 @@ class Location
             ON i.InventoryLocationId=il.InventoryLocationId;
         ";
         
+        // Prepare SQL statment and bind parameters.
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->bindParam(":id", $locationId, PDO::PARAM_INT);
+        $stmt->execute();
+        
         return $stmt->fetchAll();
     }
 }
