@@ -21,6 +21,8 @@
     session_start();
 
     $search = $_SESSION['$search'];
+    
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,6 +88,8 @@
         <?php
             if(isset($_SESSION['id']))
             {
+                $productId = $_SESSION['id'];
+                $locations = Location::readLocationsWithProduct($pdo, $productId);
                 
             }
         ?>
