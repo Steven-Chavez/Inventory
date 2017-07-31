@@ -9,6 +9,15 @@
  * Time: 4:19AM
  * Version: 1.0
  */
+
+    // Require appropriate files.
+    require_once("../../database.php");
+    require_once("php/classes/location.php");
+
+    // connect to database and obtain PDO object
+    $pdo = new DatabaseConnect();
+    $pdo = $pdo->getPDO();
+
     session_start();
 
     $search = $_SESSION['$search'];
