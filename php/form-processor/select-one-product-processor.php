@@ -11,7 +11,7 @@
 session_start();
 
 // Obtain form post data.
-$id = is_int($_POST['id']);
+$id = $_POST['id'];
 
 // Populate session with post data.
 $_SESSION['id'] = $id;
