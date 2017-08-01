@@ -86,7 +86,7 @@
         </header>
         <!--Display HTML results of product search if session id is set-->
         <?php
-            if(isset($_SESSION['id']))
+            if(isset($_SESSION['id']) || count($search)== 1)
             {
                 $productId = $_SESSION['id'];
                 $locations = Location::readLocationsWithProduct($pdo, $productId);
