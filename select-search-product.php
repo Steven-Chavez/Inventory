@@ -63,7 +63,8 @@
         <header class="col-md-6 col-md-offset-3"> 
         <?php
             $total = count($search);
-            if($search > 1 && !isset($_SESSION['id']))
+            
+            if($total > 1 && !isset($_SESSION['id']))
             {
                 echo '<h1>There are multiple search results!</h1>
                   <p>
@@ -88,9 +89,18 @@
         <?php
             if(isset($_SESSION['id']) || count($search)== 1)
             {
-                $productId = $_SESSION['id'];
+                if(isset($_SESSION['id']))
+                {
+                    $productId = $_SESSION['id'];
+                }
+                else
+                {
+                   $productId = $search[0]->ProductId; 
+                }
+                
                 $locations = Location::readLocationsWithProduct($pdo, $productId);
                 
+                var_dump($locations);
             }
         ?>
     </div>        
