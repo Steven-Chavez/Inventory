@@ -223,14 +223,16 @@ class Location
     }
     
     /**
-     * Reads all locations who has the product in it's inventory.  
+     * Reads all locations who have the selected product in its 
+     * current inventory.
+     *   
      * @param PDO $pdo
      * @param int $id
      * @return OBJ
      */
     public static function readLocationsWithProduct(&$pdo, $id)
     {
-        // SQL statement that searches for all locations by product id
+        // SQL statement that searches for all locations by product id.
         $sql = " 
             SELECT l.City, l.LocationState State, p.ProductName Name, 
                 i.Quantity, i.InventoryDate Date
