@@ -89,6 +89,7 @@
         <?php
             if(isset($_SESSION['id']) || count($search)== 1)
             {
+                // Choose appropriate productId.
                 if(isset($_SESSION['id']))
                 {
                     $productId = $_SESSION['id'];
@@ -98,9 +99,17 @@
                    $productId = $search[0]->ProductId; 
                 }
                 
+                // Obtain all locations with the productId in their inventory.
                 $locations = Location::readLocationsWithProduct($pdo, $productId);
                 
                 var_dump($locations);
+                
+                // Obtain base values for data filtering.
+                $total = count($locations);
+                $city = $locations[0]->City;
+                $state = $locations[0]->State;
+                $date = $locations[0]->Date;
+                
             }
         ?>
     </div>        
