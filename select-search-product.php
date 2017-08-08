@@ -110,6 +110,11 @@
                 $state = $locations[0]->State;
                 $date = $locations[0]->Date;
                 
+                // Loop through locations.
+                for($i = 0; $i < $total; $i++)
+                {
+                    
+                }
             }
         ?>
     </div>        
