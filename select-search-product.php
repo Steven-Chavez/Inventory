@@ -113,6 +113,21 @@
                 // Loop through locations.
                 for($i = 0; $i < $total; $i++)
                 {
+                    if($city == $locations[$i]->City && 
+                       $state == $state = $locations[$i]->State)
+                    {
+                        if($date == $locations[$i]->Date)
+                        {
+                            echo $locations[$i]->City . "<br>";
+                        }
+                    }
+                    else
+                    {
+                        $city = $locations[$i]->City;
+                        $state = $locations[$i]->State;
+                        $date = $locations[$i]->Date;
+                        $i--;
+                    }
                     
                 }
             }
