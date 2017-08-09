@@ -234,7 +234,7 @@ class Location
     {
         // SQL statement that searches for all locations by product id.
         $sql = " 
-            SELECT l.City, l.LocationState State, p.ProductName Name, 
+            SELECT i.InventoryId, l.City, l.LocationState State, p.ProductName Name, 
                 i.Quantity, i.InventoryDate Date
             FROM Locations l
             JOIN InventoryLocations il
