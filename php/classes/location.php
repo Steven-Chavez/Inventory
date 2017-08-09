@@ -237,13 +237,13 @@ class Location
             SELECT i.InventoryId, l.City, l.LocationState State, p.ProductName Name, 
                 i.Quantity, i.InventoryDate Date
             FROM Locations l
-            JOIN InventoryLocations il
+            INNER JOIN InventoryLocations il
             ON l.LocationId=il.LocationId
-            JOIN ProductInventories i
+            INNER JOIN ProductInventories i
             ON i.InventoryLocationId=il.InventoryLocationId
-            JOIN Products p
+            INNER JOIN Products p
             ON i.ProductId=p.ProductId
-            WHERE p.ProductId=:id
+            WHERE i.ProductId=:id
             ORDER BY l.LocationState, l.City, i.InventoryDate DESC;
         ";
         
