@@ -23,17 +23,21 @@
     // Obtain all inventory locations at choosen location.
     $inventoryLocations = InventoryLocation::readInventoryLocationBylocation($pdo, $locationId);
     
+    var_dump($inventoryLocations);
+    
     // Handle inventory location id session 
     if(!isset($_SESSION["iLocationId"]))
     {
         //set default location
-        $_SESSION["iLocationId"] = 0;
+        $_SESSION["iLocationId"] = $inventoryLocations[0]->Id;
     }
     
     $iLocationId = $_SESSION["iLocationId"];
     
-    $inventory = Inventory::readInventoryByLocationAndDateSort($pdo, $iLocationId+1);
-   
+    var_dump($iLocationId);
+    
+    $inventory = Inventory::readInventoryByLocationAndDateSort($pdo, $iLocationId, $locationId);
+    
     $locationName = Location::readCityStateById($pdo, $locationId);    
     
 ?>
@@ -75,9 +79,10 @@
     <div class='row'>
         <div style="padding-left: 2em" class="col-lg-4 col-lg-offset-4 col-md-8">
             <?php 
+                $name = InventoryLocation::readInventoryLocationsById($pdo, $iLocationId);
                 echo "<h1>{$locationName[0]->City}, {$locationName[0]->LocationState}</h1>";
                 echo '<h3>Location: <span style="color: #990000">' . 
-                        $inventoryLocations[$iLocationId]->Name . '</span></h3><br>';
+                 $name->Name . '</span></h3><br>';
             ?>
         </div>
     </div>
@@ -88,11 +93,9 @@
                 Select Inventory Location:
                 <select class="form-control" name="iLocationId">
                     <?php
-                        $index = 0;
                         foreach($inventoryLocations as $value)
                         {
-                            echo "<option value=\"{$index}\">{$value->Name}</option>";
-                            $index++;
+                            echo "<option value=\"{$value->Id}\">{$value->Name}</option>";
                         }
                     ?>
                 </select>
