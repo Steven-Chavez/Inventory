@@ -147,4 +147,23 @@ class InventoryLocation
         
         return $stmt->fetchAll();
     }
+    
+    public static function readInventoryLocationsById
+            (&$pdo, $invLocationId)
+    {
+        // Reads name by inventory location Id. 
+        $sql = "
+          SELECT LocationName Name
+          FROM InventoryLocations 
+          WHERE InventoryLocationId=:id;
+        ";
+       
+        // Prepare SQL statment and bind parameters.
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->bindParam(":id", $invLocationId, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        return $stmt->fetch();
+    }
 }
