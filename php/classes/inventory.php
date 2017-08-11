@@ -197,7 +197,7 @@ class Inventory
         return $stmt->fetchAll();
     }
     
-    public static function readInventoryByLocationAndDateSort(&$pdo, $locationId)
+    public static function readInventoryByLocationAndDateSort(&$pdo, $iLocId, $locId)
     {
         $sql = " 
             SELECT 
@@ -206,13 +206,17 @@ class Inventory
             FROM ProductInventories i
             INNER JOIN Products p
             ON i.ProductId=p.ProductId
-            WHERE InventoryLocationId = :id
+            INNER JOIN InventoryLocations l
+            ON l.InventoryLocationId=i.InventoryLocationId
+            WHERE i.InventoryLocationId = :id
+            AND l.LocationId = :locId
             ORDER BY i.InventoryDate DESC, i.ProductId;
             ";
         
         $stmt = $pdo->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_OBJ);
-        $stmt->bindParam(":id", $locationId, PDO::PARAM_INT);
+        $stmt->bindParam(":id", $iLocId, PDO::PARAM_INT);
+        $stmt->bindParam(":locId", $locId, PDO::PARAM_INT);
         $stmt->execute();
 
         return $stmt->fetchAll();
