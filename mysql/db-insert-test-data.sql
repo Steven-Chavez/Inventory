@@ -25,8 +25,15 @@ VALUES
 INSERT INTO Locations (Address, City, LocationState, 
     ZipCode, Zone, Region)
 VALUES
+    ('22 Anderson lane NW', 'Albuquerque', 'New Mexico', '87222', 
+     'Albuquerque', 'Mountain'),
     ('22 Anderson lane NW', 'Clovis', 'New Mexico', '87222', 
-     'Albuquerque', 'Mountain');
+     'Albuquerque', 'Mountain'),
+    ('22 Anderson lane NW', 'Farmington', 'New Mexico', '87222', 
+     'Albuquerque', 'Mountain'),
+    ('22 Anderson lane NW', 'Gallup', 'New Mexico', '87222', 
+     'Albuquerque', 'Mountain'),
+    ;
 
 -- InventoryLoactions
 INSERT INTO InventoryLocations (LocationId, LocationName)
