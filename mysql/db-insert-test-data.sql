@@ -42,7 +42,13 @@ VALUES
     (1, 'Warehouse (PickByLights)'),
     (1, 'Trailer A'),
     (1, 'Trailer B'),
-    (1, 'Trailer C');
+    (1, 'Trailer C'),
+    (2, 'Bin (Southside)'),
+    (2, 'Bin (Northside)'),
+    (3, 'Bin (Southside)'),
+    (3, 'Bin (Northside)'),
+    (4, 'Bin (Southside)'),
+    (4, 'Bin (Northside)');
 
 -- Products
 INSERT INTO Products (ProductName, ProductNumber, Color, 
