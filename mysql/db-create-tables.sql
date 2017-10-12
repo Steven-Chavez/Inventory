@@ -99,7 +99,6 @@ CREATE TABLE ProductInventories
         REFERENCES InventoryLocations(InventoryLocationId),
     CONSTRAINT uc_productInventory 
         UNIQUE(ProductId, InventoryLocationId,InventoryDate)
-    
 );
 
 
