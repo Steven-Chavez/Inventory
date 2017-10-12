@@ -20,9 +20,7 @@
 
     session_start();
 
-    $search = $_SESSION['$search'];
-    
-    
+    $search = $_SESSION['$search'];   
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,54 +82,77 @@
                 </form>';
             }
         ?>
-        </header>
-        <!--Display HTML results of product search if session id is set-->
-        <?php
-            if(isset($_SESSION['id']) || count($search)== 1)
-            {
+        </header>          
+    </div>
+    <!--Display HTML results of product search if session id is set-->
+    <main style="padding-left: 2em" class="row">
+        <div class="col-md-6 col-md-offset-3 table-responsive">
+            <?php
+            if (isset($_SESSION['id']) || count($search) == 1) {
                 // Choose appropriate productId.
-                if(isset($_SESSION['id']))
-                {
+                if (isset($_SESSION['id'])) {
                     $productId = $_SESSION['id'];
+                } else {
+                    $productId = $search[0]->ProductId;
                 }
-                else
-                {
-                   $productId = $search[0]->ProductId; 
-                }
-                
+
                 // Obtain all locations with the productId in their inventory.
                 $locations = Location::readLocationsWithProduct($pdo, $productId);
-                
-                var_dump($locations);
-                
+
                 // Obtain base values for data filtering.
                 $total = count($locations);
                 $city = $locations[0]->City;
                 $state = $locations[0]->State;
                 $date = $locations[0]->Date;
+
+                // Display info header
+                echo '
+                    <h2>Search Results!</h2>
+                    <p>
+                        The following locations have the product you are 
+                        searching for based off most current inventory. 
+                        In order to save the company money please
+                        contact any of the locations to see if they could
+                        send over any extra they won\'t need.
+                    </p>
+                ';
                 
+                // Set up table headers
+                echo '
+                    <table class="table table-bordered">
+                    <tr>
+                        <th>Quantity</th>
+                        <th>Product Name</th>
+                        <th>Location</th>
+                        <th>Current Inventory Date</th>
+                    </tr>        
+                                
+                   ';
                 // Loop through locations.
-                for($i = 0; $i < $total; $i++)
-                {
-                    if($city == $locations[$i]->City && 
-                       $state == $state = $locations[$i]->State)
-                    {
-                        if($date == $locations[$i]->Date)
-                        {
-                            echo $locations[$i]->City . "<br>";
+                for ($i = 0; $i < $total; $i++) {
+                    if ($city == $locations[$i]->City &&
+                            $state == $locations[$i]->State) {
+                        if ($date == $locations[$i]->Date) {
+                            echo "
+                                    <tr>
+                                        <td>{$locations[$i]->Quantity}</tb>
+                                        <td>{$locations[$i]->Name}</td>
+                                        <td>{$locations[$i]->City}, {$locations[$i]->State}</td>
+                                        <td>{$locations[$i]->Date}</td>
+                                    </tr> 
+                                ";
                         }
-                    }
-                    else
-                    {
+                    } else {
                         $city = $locations[$i]->City;
                         $state = $locations[$i]->State;
                         $date = $locations[$i]->Date;
                         $i--;
                     }
-                    
                 }
+                echo "</table>";
             }
-        ?>
-    </div>        
+            ?>
+        </div>
+    </main> 
 </body>
 </html>
