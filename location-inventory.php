@@ -34,8 +34,6 @@
     
     $iLocationId = $_SESSION["iLocationId"];
     
-    var_dump($iLocationId);
-    
     $inventory = Inventory::readInventoryByLocationAndDateSort($pdo, $iLocationId, $locationId);
     
     $locationName = Location::readCityStateById($pdo, $locationId);    
